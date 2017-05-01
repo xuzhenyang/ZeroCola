@@ -1,4 +1,4 @@
-package co.lilpilot;
+package co.lilpilot.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
