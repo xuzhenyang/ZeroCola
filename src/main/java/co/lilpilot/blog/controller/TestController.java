@@ -24,41 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1")
 public class TestController {
+
     @Autowired
     private UserService userService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-
-    @PostMapping("/login")
-    public Map<String, String> login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device) {
-
-        // Perform the security
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        username,
-                        password
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // Reload password post-security so we can generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        // Perform the security
-        final String token = jwtTokenUtil.generateToken(userDetails, device);
-
-        // Return the token
-        // return ResponseEntity.ok(new JwtAuthenticationResponse(token));
-        HashMap<String, String> r = new HashMap<>();
-        r.put("token", token);
-        return r;
-    }
 
     @GetMapping("/hello")
     public String hello() {
