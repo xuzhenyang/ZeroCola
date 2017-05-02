@@ -58,6 +58,17 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- for jwt token -->
+		<dependency>
+			<groupId>org.springframework.mobile</groupId>
+			<artifactId>spring-mobile-device</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+
 		<!-- springfox-swagger2 api docs -->
 		<dependency>
 			<groupId>io.springfox</groupId>
