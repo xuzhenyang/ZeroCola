@@ -3,6 +3,7 @@ package co.lilpilot.blog.controller;
 import co.lilpilot.blog.model.User;
 import co.lilpilot.blog.security.JwtTokenUtil;
 import co.lilpilot.blog.service.UserService;
+import co.lilpilot.blog.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -48,10 +49,9 @@ public class TestController {
         return "init success";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/test")
-    public String test() {
-        return "you are admin";
+    public Result<String> test() {
+        return Result.success("you are admin");
     }
 
 }
