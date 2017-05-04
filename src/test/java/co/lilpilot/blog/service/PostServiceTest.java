@@ -57,7 +57,6 @@ public class PostServiceTest {
      */
     @Test
     public void testSaveOrUpdate() throws Exception {
-
         //test save
         Assert.assertNull(postService.getByTitle("test"));
         Post post = new Post();
