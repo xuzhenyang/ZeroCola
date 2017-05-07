@@ -6,6 +6,8 @@ import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by lilpilot on 2017/5/2.
  */
@@ -14,6 +16,10 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
 
     public Post getByTitle(String title) {
         if (Strings.isNullOrEmpty(title)) {

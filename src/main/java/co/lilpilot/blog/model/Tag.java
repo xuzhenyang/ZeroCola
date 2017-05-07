@@ -22,7 +22,7 @@ public class Tag extends BaseModel {
     @ManyToMany(mappedBy = "tags")
     private List<Post> posts = new ArrayList<>();
 
-    //toString不包含tags 避免死循环
+    //toString不包含posts 避免死循环
     @Override
     public String toString() {
         return "Tag{" +
