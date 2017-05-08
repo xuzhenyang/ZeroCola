@@ -21,6 +21,13 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public Post getById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id is null");
+        }
+        return postRepository.findOne(id);
+    }
+
     public Post getByTitle(String title) {
         if (Strings.isNullOrEmpty(title)) {
             throw new IllegalArgumentException("title is empty");

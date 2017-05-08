@@ -59,6 +59,16 @@ public class PostServiceTest {
     }
 
     /**
+     * Method: getById(Long id)
+     */
+    @Test
+    public void testGetById() throws Exception {
+        Post post = createPost("test");
+        Post result = postService.saveOrUpdate(post);
+        Assert.assertEquals(result, postService.getById(result.getId()));
+    }
+
+    /**
      * Method: getAllPosts()
      */
     @Test
