@@ -18,7 +18,8 @@ tag多选（编辑文章时）
 
 日志
 数据库备份
-升级自动化
+自动化部署
+Docker?
 
 ---
 
@@ -45,4 +46,7 @@ GET /api/v1/comments
 GET /api/v1/comments/{id}
 POST /api/v1/comments
 DELETE /api/v1/comments/{id}
+
+// 访客记录
+GET /api/v1/records
 ```

@@ -12,8 +12,16 @@
 
 前端：
 
-dva + vue（待定）
+React(dva) + vue（待定）
 
 后端：
 
-SpringBoot + SpringMVC + SpringDataJpa + H2 + SpringSecurity + JWT + Swagger
+SpringBoot + SpringMVC + SpringDataJpa + H2 + SpringSecurity + JWT
+
+API doc:
+
+Swagger
+
+Mock:
+
+easy-mock
