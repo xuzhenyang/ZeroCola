@@ -26,17 +26,13 @@ public abstract class BaseModel {
     @Column(nullable = false)
     private Date updateTime;
 
-    @ApiModelProperty(value = "状态")
-    private String status;
-
     @PrePersist
     public void preSave() {
-        createTime = updateTime = new Date();
-        status = "on";
+        this.createTime = new Date();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updateTime = new Date();
+        this.updateTime = new Date();
     }
 }

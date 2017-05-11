@@ -13,7 +13,6 @@ import java.util.List;
  */
 @Data
 @Entity
-@ToString(callSuper = true)
 @Table(name = "tags")
 public class Tag extends BaseModel {
     @Column(nullable = false, unique = true)
