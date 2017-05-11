@@ -87,6 +87,8 @@ public class PostServiceTest {
         postService.saveOrUpdate(post_1);
         postService.saveOrUpdate(post_2);
         Assert.assertEquals(2, postService.getAllPosts(0, 10).getContent().size());
+        // test for pageable
+        Assert.assertEquals(1, postService.getAllPosts(0, 1).getContent().size());
     }
 
     /**
@@ -104,7 +106,8 @@ public class PostServiceTest {
         postService.saveOrUpdate(post_2);
         postService.saveOrUpdate(post_3);
         Assert.assertEquals(2, postService.getAllOpenPosts(0, 10).getContent().size());
-        System.out.println(postService.getAllOpenPosts(0, 10).getContent());
+        // test for pageable
+        Assert.assertEquals(1, postService.getAllPosts(0, 1).getContent().size());
 
     }
 
