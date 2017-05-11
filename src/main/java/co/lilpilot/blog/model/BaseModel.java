@@ -23,7 +23,6 @@ public abstract class BaseModel {
     private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
-    @Column(nullable = false)
     private Date updateTime;
 
     @PrePersist

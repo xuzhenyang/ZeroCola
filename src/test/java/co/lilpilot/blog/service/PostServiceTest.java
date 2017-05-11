@@ -50,6 +50,14 @@ public class PostServiceTest {
         return post;
     }
 
+    public static Post createPost(String title, String content, Integer status) {
+        Post post = new Post();
+        post.setTitle(title);
+        post.setContent(content);
+        post.setStatus(status);
+        return post;
+    }
+
     public static Post createPost(String title, String content, Tag tag) {
         Post post = new Post();
         post.setTitle(title);
@@ -73,12 +81,31 @@ public class PostServiceTest {
      */
     @Test
     public void testGetAllPosts() throws Exception {
-        Assert.assertEquals(0, postService.getAllPosts().size());
+        Assert.assertEquals(0, postService.getAllPosts(0, 10).getContent().size());
         Post post_1 = createPost("test1");
         Post post_2 = createPost("test2");
         postService.saveOrUpdate(post_1);
         postService.saveOrUpdate(post_2);
-        Assert.assertEquals(2, postService.getAllPosts().size());
+        Assert.assertEquals(2, postService.getAllPosts(0, 10).getContent().size());
+    }
+
+    /**
+     *
+     * Method: getAllOpenPosts(Integer page, Integer pageSize)
+     *
+     */
+    @Test
+    public void testGetAllOpenPosts() throws Exception {
+        Assert.assertEquals(0, postService.getAllOpenPosts(0, 10).getContent().size());
+        Post post_1 = createPost("test1", "hello", 1);
+        Post post_2 = createPost("test2", "hello", 0);
+        Post post_3 = createPost("test2", "hello", 1);
+        postService.saveOrUpdate(post_1);
+        postService.saveOrUpdate(post_2);
+        postService.saveOrUpdate(post_3);
+        Assert.assertEquals(2, postService.getAllOpenPosts(0, 10).getContent().size());
+        System.out.println(postService.getAllOpenPosts(0, 10).getContent());
+
     }
 
     /**

@@ -4,6 +4,8 @@ import co.lilpilot.blog.model.Post;
 import co.lilpilot.blog.repository.PostRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,12 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public Page<Post> getAllPosts(Integer page, Integer pageSize) {
+        return postRepository.findAll(new PageRequest(page, pageSize));
+    }
+
+    public Page<Post> getAllOpenPosts(Integer page, Integer pageSize) {
+        return postRepository.findAllOpenPosts(new PageRequest(page, pageSize));
     }
 
     public Post getById(Long id) {
