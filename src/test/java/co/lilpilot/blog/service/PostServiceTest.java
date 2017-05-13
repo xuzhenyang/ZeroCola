@@ -12,6 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * PostService Tester.
  *
@@ -26,6 +29,8 @@ public class PostServiceTest {
 
     @Autowired
     private PostService postService;
+    @Autowired
+    private TagService tagService;
 
     @Before
     public void before() throws Exception {
@@ -138,6 +143,21 @@ public class PostServiceTest {
         post.addTag(tag);
         postService.saveOrUpdate(post);
         Assert.assertNotNull(postService.getByTitle("test"));
+        Assert.assertNotNull(tagService.getByName("tag_test"));
+
+        //测试保存post 其中属性已包含tags
+        Assert.assertNull(postService.getByTitle("test_2"));
+        post = createPost("test_2", "hello world");
+        tag = new Tag();
+        tag.setName("tag_test_2");
+        List<Tag> tagList = new ArrayList<>();
+        tagList.add(tag);
+        post.setTags(tagList);
+        postService.saveOrUpdate(post);
+        Assert.assertNotNull(postService.getByTitle("test_2").getTags());
+        Assert.assertEquals(1, postService.getByTitle("test_2").getTags().size());
+        Assert.assertNotNull(tagService.getByName("tag_test_2"));
+        Assert.assertNotNull(tagService.getByName("tag_test_2").getPosts());
 
         //test update
         Assert.assertNull(postService.getByTitle("update_test"));

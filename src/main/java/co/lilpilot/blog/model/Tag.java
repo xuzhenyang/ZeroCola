@@ -19,6 +19,8 @@ public class Tag extends BaseModel {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
+    // @JsonIgnore避免response中的json数据产生死循环
+    @JsonIgnore
     private List<Post> posts = new ArrayList<>();
 
     //toString不包含posts 避免死循环

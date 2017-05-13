@@ -18,6 +18,8 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private MarkdownService markdownService;
 
     public Page<Post> getAllPosts(Integer page, Integer pageSize) {
         return postRepository.findAll(new PageRequest(page, pageSize));
@@ -45,6 +47,8 @@ public class PostService {
         if (post == null) {
             throw new IllegalArgumentException("post is null");
         }
+        //render markdown content
+        post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);
     }
 }

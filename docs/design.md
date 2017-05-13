@@ -29,9 +29,9 @@ Docker?
 POST /login
 GET /logout
 
-GET /api/v1/posts
+GET /api/v1/posts?page={page}&pageSize={pageSize}
 GET /api/v1/posts/{id}
-GET /api/v1/posts?name={title} //search by title
+GET /api/v1/posts/title/{title} //search by title
 POST /api/v1/posts
 PUT /api/v1/posts/{id}
 DELETE /api/v1/posts/{id}
