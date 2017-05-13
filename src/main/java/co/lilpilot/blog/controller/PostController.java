@@ -46,12 +46,14 @@ public class PostController {
 
     @PostMapping("/posts")
     @ApiOperation(value = "创建文章")
+    @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
     public Result<Post> createPost(@RequestBody Post post) {
         return Result.success(postService.saveOrUpdate(post));
     }
 
     @PutMapping("/posts")
     @ApiOperation(value = "更新文章")
+    @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
     public Result<Post> updatePost(@RequestBody Post post) {
         return Result.success(postService.saveOrUpdate(post));
     }
