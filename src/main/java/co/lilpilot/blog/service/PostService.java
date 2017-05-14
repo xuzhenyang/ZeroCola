@@ -29,6 +29,13 @@ public class PostService {
         return postRepository.findAllOpenPosts(new PageRequest(page, pageSize));
     }
 
+    public Page<Post> getOpenPostsByKeyword(String keyword, Integer page, Integer pageSize) {
+        if(Strings.isNullOrEmpty(keyword)) {
+            throw new IllegalArgumentException("keyword is null or empty");
+        }
+        return postRepository.findOpenPostsByKeyword(keyword, new PageRequest(page, pageSize));
+    }
+
     public Post getById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("id is null");
@@ -38,7 +45,7 @@ public class PostService {
 
     public Post getByTitle(String title) {
         if (Strings.isNullOrEmpty(title)) {
-            throw new IllegalArgumentException("title is empty");
+            throw new IllegalArgumentException("title is null or empty");
         }
         return postRepository.findByTitle(title);
     }
@@ -51,4 +58,5 @@ public class PostService {
         post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);
     }
+
 }

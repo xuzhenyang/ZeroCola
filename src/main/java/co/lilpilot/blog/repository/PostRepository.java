@@ -16,4 +16,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("from Post post where post.status = '1' order by post.createTime desc")
     Page<Post> findAllOpenPosts(Pageable pageable);
+
+    @Query("from Post post where post.status = '1' and post.title like ?1% order by post.createTime desc")
+    Page<Post> findOpenPostsByKeyword(String keyword, Pageable pageable);
 }

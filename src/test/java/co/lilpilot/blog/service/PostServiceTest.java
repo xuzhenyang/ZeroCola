@@ -117,6 +117,28 @@ public class PostServiceTest {
     }
 
     /**
+     *
+     * Method: getOpenPostsByKeyword(String keyword, Integer page, Integer pageSize)
+     *
+     */
+    @Test
+    public void testGetOpenPostsByKeyword() throws Exception {
+        Assert.assertEquals(0, postService.getOpenPostsByKeyword("test", 0, 10).getContent().size());
+        Post post_1 = createPost("test", "hello", 1);
+        //closed post
+        Post post_2 = createPost("test2333", "hello", 0);
+        Post post_3 = createPost("test6", "hello", 1);
+        //keyword not mapped
+        Post post_4 = createPost("hello", "test", 1);
+        postService.saveOrUpdate(post_1);
+        postService.saveOrUpdate(post_2);
+        postService.saveOrUpdate(post_3);
+        postService.saveOrUpdate(post_4);
+        Assert.assertEquals(4, postService.getAllPosts(0, 10).getContent().size());
+        Assert.assertEquals(2, postService.getOpenPostsByKeyword("test", 0, 10).getContent().size());
+    }
+
+    /**
      * Method: getByTitle(String title)
      */
     @Test

@@ -31,7 +31,7 @@ GET /logout
 
 GET /api/v1/posts?page={page}&pageSize={pageSize}
 GET /api/v1/posts/{id}
-GET /api/v1/posts/title/{title} //search by title
+GET /api/v1/posts/keyword/{keyword}?page={page}&pageSize={pageSize}
 POST /api/v1/posts
 PUT /api/v1/posts/{id}
 DELETE /api/v1/posts/{id}

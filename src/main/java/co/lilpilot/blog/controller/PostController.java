@@ -21,7 +21,7 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("/posts")
-    @ApiOperation(value = "获取所有文章信息（打开状态）")
+    @ApiOperation(value = "获取所有文章（打开状态）")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "当前页数", defaultValue = "1", dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页条目数", defaultValue = "10", dataType = "Integer", paramType = "query")
@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    @ApiOperation(value = "获取指定文章信息", notes = "根据文章id获取文章信息")
+    @ApiOperation(value = "获取指定id的文章", notes = "根据文章id获取文章")
     @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path")
     public Result<Post> getPostById(@PathVariable Long id) {
         Post post = postService.getById(id);
@@ -42,6 +42,21 @@ public class PostController {
             return Result.fail("500", "文章不存在");
         }
         return Result.success(post);
+    }
+
+    @GetMapping("/posts/keyword/{keyword}")
+    @ApiOperation(value = "模糊查询文章", notes = "根据关键词keyword获取文章")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "keyword", value = "关键词keyword", required = true, dataType = "String", paramType = "path"),
+            @ApiImplicitParam(name = "page", value = "当前页数", defaultValue = "1", dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条目数", defaultValue = "10", dataType = "Integer", paramType = "query")
+    })
+    public Result<Page<Post>> getPostByTitle(
+            @PathVariable String keyword,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        page = page < 1 ? 0 : page - 1;
+        return Result.success(postService.getOpenPostsByKeyword(keyword, page, pageSize));
     }
 
     @PostMapping("/posts")
