@@ -24,4 +24,4 @@ nbdist/
 .nb-gradle/
 
 ### node ###
-/view/antd/node_modules/
+/view/dva/node_modules/
