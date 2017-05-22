@@ -1,0 +1,25 @@
+{
+  "entry": "src/index.js",
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+        "dva-hmr",
+        "transform-runtime",
+        ["import", { "libraryName": "antd", "style": "css" }]
+      ]
+    },
+    "production": {
+      "extraBabelPlugins": [
+        "transform-runtime",
+        ["import", { "libraryName": "antd", "style": "css" }]
+      ]
+    }
+  },
+  "proxy": {
+    "/api": {
+      "target": "https://www.easy-mock.com/mock/5922f2f59aba4141cf2b0a5b/zerocola/api",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api" : "" }
+    }
+  }
+}
