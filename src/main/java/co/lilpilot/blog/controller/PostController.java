@@ -66,11 +66,18 @@ public class PostController {
         return Result.success(postService.saveOrUpdate(post));
     }
 
-    @PutMapping("/posts")
+    @PutMapping("/posts/{id}")
     @ApiOperation(value = "更新文章")
-    @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
-    public Result<Post> updatePost(@RequestBody Post post) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path"),
+            @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
+    })
+    public Result<Post> updatePost(
+            @PathVariable Long id,
+            @RequestBody Post post) {
         return Result.success(postService.saveOrUpdate(post));
     }
+
+    //TODO deletePost
 
 }

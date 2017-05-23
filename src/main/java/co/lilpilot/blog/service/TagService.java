@@ -4,9 +4,9 @@ import co.lilpilot.blog.model.Tag;
 import co.lilpilot.blog.repository.TagRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by lilpilot on 2017/5/3.
@@ -17,8 +17,15 @@ public class TagService {
     @Autowired
     private TagRepository tagRepository;
 
-    public List<Tag> getAllTags() {
-        return tagRepository.findAll();
+    public Page<Tag> getAllTags(Integer page, Integer pageSize) {
+        return tagRepository.findAll(new PageRequest(page, pageSize));
+    }
+
+    public Tag getById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id is null");
+        }
+        return tagRepository.findOne(id);
     }
 
     public Tag getByName(String name) {
