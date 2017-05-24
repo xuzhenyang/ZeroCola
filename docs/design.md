@@ -26,21 +26,34 @@ Docker?
 ## API
 
 ```
-POST /login
-GET /logout
+//admin
+POST /admin/login
+GET /admin/logout
 
+//后台对文章（所有状态可见）
+GET /api/v1/admin/posts?page={page}&pageSize={pageSize}
+GET /api/v1/admin/posts/{id}
+POST /api/v1/admin/posts
+PUT /api/v1/admin/posts/{id}
+DELETE /api/v1/admin/posts/{id}
+
+//用户对文章（仅开放状态可见）
 GET /api/v1/posts?page={page}&pageSize={pageSize}
 GET /api/v1/posts/{id}
 GET /api/v1/posts/keyword/{keyword}?page={page}&pageSize={pageSize}
-POST /api/v1/posts
-PUT /api/v1/posts/{id}
-DELETE /api/v1/posts/{id}
 
+//后台对标签
+POST /api/v1/admin/tags
+PUT /api/v1/admin/tags/{id}
+
+//用户对标签
 GET /api/v1/tags
 GET /api/v1/tags/{id}
-POST /api/v1/tags
-PUT /api/v1/tags/{id}
 
+//后台对评论
+DELETE /api/v1/admin/comments/{id}
+
+//用户对评论
 GET /api/v1/comments
 GET /api/v1/comments/{id}
 POST /api/v1/comments
