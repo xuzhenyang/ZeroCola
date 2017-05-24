@@ -40,12 +40,10 @@ GET /api/v1/tags
 GET /api/v1/tags/{id}
 POST /api/v1/tags
 PUT /api/v1/tags/{id}
-DELETE /api/v1/tags/{id}
 
 GET /api/v1/comments
 GET /api/v1/comments/{id}
 POST /api/v1/comments
-DELETE /api/v1/comments/{id}
 
 // 访客记录
 GET /api/v1/records

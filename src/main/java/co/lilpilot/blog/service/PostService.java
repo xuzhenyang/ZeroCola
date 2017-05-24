@@ -59,4 +59,13 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    public Post close(Post post) {
+        if (post == null) {
+            throw new IllegalArgumentException("post is null");
+        }
+        // 0:close 1:open
+        post.setStatus(0);
+        return postRepository.save(post);
+    }
+
 }

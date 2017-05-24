@@ -78,6 +78,15 @@ public class PostController {
         return Result.success(postService.saveOrUpdate(post));
     }
 
-    //TODO deletePost
+    @DeleteMapping("/posts/{id}")
+    @ApiOperation(value = "删除文章")
+    @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path")
+    public Result<Post> closePost(@PathVariable Long id) {
+        Post post = postService.getById(id);
+        if (post == null) {
+            return Result.fail("500", "文章不存在");
+        }
+        return Result.success(postService.close(post));
+    }
 
 }

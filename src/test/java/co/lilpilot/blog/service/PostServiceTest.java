@@ -188,5 +188,20 @@ public class PostServiceTest {
         Assert.assertNotNull(postService.getByTitle("update_test"));
     }
 
+    /**
+     *
+     * Method: close(Post post)
+     *
+     */
+    @Test
+    public void testClose() throws Exception {
+        Post post = createPost("test", "hello world", 1);
+        post = postService.saveOrUpdate(post);
+        Assert.assertEquals(1, postService.getAllOpenPosts(0, 10).getContent().size());
+        postService.close(post);
+        Assert.assertEquals(0, postService.getAllOpenPosts(0, 10).getContent().size());
+    }
+
+
 
 }
