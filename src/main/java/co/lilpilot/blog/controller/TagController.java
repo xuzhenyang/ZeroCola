@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class TagController {
 
-    /*
-POST /api/v1/tags
-PUT /api/v1/tags/{id}
-DELETE /api/v1/tags/{id}
-* */
     @Autowired
     private TagService tagService;
 
@@ -50,24 +45,4 @@ DELETE /api/v1/tags/{id}
         return Result.success(tag);
     }
 
-    @PostMapping("/tags")
-    @ApiOperation(value = "创建新标签")
-    @ApiImplicitParam(name = "tag", value = "标签类", required = true, dataType = "Tag", paramType = "body")
-    public Result<Tag> createTag(@RequestBody Tag tag) {
-        return Result.success(tagService.saveOrUpdate(tag));
-    }
-
-    @PutMapping("/tags/{id}")
-    @ApiOperation(value = "更新标签")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Long", paramType = "path"),
-            @ApiImplicitParam(name = "tag", value = "标签类", required = true, dataType = "Tag", paramType = "body")
-    })
-    public Result<Tag> updateTag(
-            @PathVariable Long id,
-            @RequestBody Tag tag) {
-        return Result.success(tagService.saveOrUpdate(tag));
-    }
-
-    //TODO deleteTag
 }
