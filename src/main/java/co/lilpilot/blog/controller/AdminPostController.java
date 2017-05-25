@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
  * Created by lilpilot on 2017/5/8.
  */
 @RestController
-@RequestMapping("/api/v1")
-public class PostController {
+@RequestMapping("/api/v1/admin")
+public class AdminPostController {
 
     @Autowired
     private PostService postService;
@@ -26,37 +26,52 @@ public class PostController {
             @ApiImplicitParam(name = "page", value = "当前页数", defaultValue = "1", dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页条目数", defaultValue = "10", dataType = "Integer", paramType = "query")
     })
-    public Result<Page<Post>> getAllOpenPosts(
+    public Result<Page<Post>> getAllPosts(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer pageSize) {
         page = page < 1 ? 0 : page - 1;
-        return Result.success(postService.getAllOpenPosts(page, pageSize));
+        return Result.success(postService.getAllPosts(page, pageSize));
     }
 
     @GetMapping("/posts/{id}")
     @ApiOperation(value = "获取指定id的文章", notes = "根据文章id获取文章")
     @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path")
     public Result<Post> getPostById(@PathVariable Long id) {
-        Post post = postService.getOpenPostById(id);
+        Post post = postService.getById(id);
         if (post == null) {
             return Result.fail("500", "文章不存在");
         }
         return Result.success(post);
     }
 
-    @GetMapping("/posts/keyword/{keyword}")
-    @ApiOperation(value = "模糊查询文章", notes = "根据关键词keyword获取文章")
+    @PostMapping("/posts")
+    @ApiOperation(value = "创建文章")
+    @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
+    public Result<Post> createPost(@RequestBody Post post) {
+        return Result.success(postService.saveOrUpdate(post));
+    }
+
+    @PutMapping("/posts/{id}")
+    @ApiOperation(value = "更新文章")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "keyword", value = "关键词keyword", required = true, dataType = "String", paramType = "path"),
-            @ApiImplicitParam(name = "page", value = "当前页数", defaultValue = "1", dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页条目数", defaultValue = "10", dataType = "Integer", paramType = "query")
+            @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path"),
+            @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
     })
-    public Result<Page<Post>> getPostByTitle(
-            @PathVariable String keyword,
-            @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
-        page = page < 1 ? 0 : page - 1;
-        return Result.success(postService.getOpenPostsByKeyword(keyword, page, pageSize));
+    public Result<Post> updatePost(
+            @PathVariable Long id,
+            @RequestBody Post post) {
+        return Result.success(postService.saveOrUpdate(post));
+    }
+
+    @DeleteMapping("/posts/{id}")
+    @ApiOperation(value = "删除文章")
+    @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path")
+    public Result<Post> closePost(@PathVariable Long id) {
+        Post post = postService.getById(id);
+        if (post == null) {
+            return Result.fail("500", "文章不存在");
+        }
+        return Result.success(postService.close(post));
     }
 
 }

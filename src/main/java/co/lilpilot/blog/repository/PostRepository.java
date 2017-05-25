@@ -12,6 +12,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByTitle(String title);
 
+    @Query("from Post post where post.status = '1' and post.id = ?1")
+    Post findOpenPostById(Long id);
+
     Page<Post> findAll(Pageable pageable);
 
     @Query("from Post post where post.status = '1' order by post.createTime desc")

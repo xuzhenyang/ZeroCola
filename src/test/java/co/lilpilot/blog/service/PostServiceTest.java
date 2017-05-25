@@ -139,6 +139,20 @@ public class PostServiceTest {
     }
 
     /**
+     *
+     * Method: getOpenPostById(Long id)
+     *
+     */
+    @Test
+    public void testGetOpenPostById() throws Exception {
+        Post post = createPost("test", "test", 0);
+        post = postService.saveOrUpdate(post);
+        Assert.assertNotNull(postService.getById(post.getId()));
+        Assert.assertNull(postService.getOpenPostById(post.getId()));
+    }
+
+
+    /**
      * Method: getByTitle(String title)
      */
     @Test
