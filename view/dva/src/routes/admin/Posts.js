@@ -6,7 +6,6 @@ import PostComponent from '../../components/admin/Posts/Posts';
 function Posts() {
   return (
     <div className={styles.normal}>
-      Route Component: Posts
       <PostComponent />
     </div>
   );
