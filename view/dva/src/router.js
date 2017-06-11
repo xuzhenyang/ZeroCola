@@ -4,7 +4,7 @@ import IndexPage from './routes/IndexPage';
 
 import Posts from "./routes/admin/Posts.js";
 
-import AdminPage from "./routes/AdminPage.js";
+import AdminPage from "./routes/admin/AdminPage.js";
 
 function RouterConfig({ history }) {
   return (

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Layout, Icon } from 'antd';
-import styles from './MainLayout.css';
+import styles from './MyLayout.css';
 import MySider from './MySider.js'
 
 const { Header, Content, Footer } = Layout;
 
-function MainLayout({ children }) {
+function MyLayout({ children }) {
   return (
     <Layout className={styles.normal}>
       <MySider />
@@ -22,4 +22,4 @@ function MainLayout({ children }) {
   );
 }
 
-export default MainLayout;
+export default MyLayout;
