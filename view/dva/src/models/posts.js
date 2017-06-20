@@ -3,12 +3,18 @@ import * as postService from '../services/posts';
 export default {
   namespace: 'posts',
   state: {
-    postList: []
+    postList: [],
+    post: {}
   },
   reducers: {
-    update(state, action) {
+    updatePostList(state, action) {
       const {postList} = action.payload;
       return { ...state, postList };
+    },
+    updatePost(state, action) {
+      const {post} = action.payload;
+      console.log(action);
+      return { ...state, post };
     },
   },
   effects: {
@@ -16,7 +22,7 @@ export default {
       const response = yield call(postService.fetch, { page, pageSize });
       const data = response.data.data.content;
       yield put({
-        type: 'update',
+        type: 'updatePostList',
         payload: {
           postList: data
         }
