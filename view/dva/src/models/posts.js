@@ -6,7 +6,7 @@ export default {
     postList: []
   },
   reducers: {
-    save(state, action) {
+    update(state, action) {
       const {postList} = action.payload;
       return { ...state, postList };
     },
@@ -16,7 +16,7 @@ export default {
       const response = yield call(postService.fetch, { page, pageSize });
       const data = response.data.data.content;
       yield put({
-        type: 'save',
+        type: 'update',
         payload: {
           postList: data
         }

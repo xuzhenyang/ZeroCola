@@ -15,13 +15,22 @@ const MySider = (props) => <Sider {...props} >
                 首页
             </Link>
         </Menu.Item>
-        <Menu.Item key="2">
-            <Link to="/admin/posts">
-                <Icon type="file-text" />
-                文章管理
-            </Link>
-        </Menu.Item>
-        <Menu.Item key="3">
+        <SubMenu
+            key="sub1"
+            title={<span><Icon type="file-text" /><span className="nav-text">文章管理</span></span>}
+        >
+            <Menu.Item key="2">
+                <Link to="/admin/posts">
+                    文章列表
+                </Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+                <Link to="/admin/postEditor">
+                    新建
+                </Link>
+            </Menu.Item>
+        </SubMenu>
+        <Menu.Item key="4">
             <Link to="/admin/tags">
                 <Icon type="tags-o" />
                 标签管理
@@ -35,7 +44,7 @@ const MySider = (props) => <Sider {...props} >
             <Menu.Item key="6">新建</Menu.Item>
         </SubMenu>*/}
     </Menu>
-</Sider>
+</Sider >
 
 /** 注意：如果你想在 Sider 基础上进行包装，需要给自定义组件加上 __ANT_LAYOUT_SIDER = true 设置 */
 MySider.__ANT_LAYOUT_SIDER = true;
