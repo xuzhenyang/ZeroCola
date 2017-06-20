@@ -13,7 +13,6 @@ export default {
     },
     updatePost(state, action) {
       const {post} = action.payload;
-      console.log(action);
       return { ...state, post };
     },
   },
