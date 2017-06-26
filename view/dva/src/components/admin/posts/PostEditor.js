@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Row, Col } from 'antd';
 import Markdown from 'react-markdown-plus';
-import styles from './PostEditor.css';
+// import styles from './PostEditor.css';
 const FormItem = Form.Item;
 
 function PostEditor({ dispatch, posts }) {
@@ -19,13 +19,21 @@ function PostEditor({ dispatch, posts }) {
   }
 
   return (
-    <div className={styles.normal}>
+    <div>
       <Form>
         <FormItem label="Titile">
           <Input />
         </FormItem>
-        <Input type="textarea" onChange={editContent} rows={30} />
-        <Markdown text={posts.post.content} style={{ maxWidth: 1000 }} />
+        <Row gutter={32}>
+          <Col span={12}>
+            <Input type="textarea" onChange={editContent} rows={38} />
+          </Col>
+          <Col span={12}>
+            <div style={{ overflowY: "scroll"}}>
+              <Markdown text={posts.post.content} style={{ margin: '' , maxWidth: 700, maxHeight: 700 }} />
+            </div>
+          </Col>
+        </Row>
       </Form>
     </div>
   );
