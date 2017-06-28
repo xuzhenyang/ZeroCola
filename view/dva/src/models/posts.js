@@ -27,6 +27,11 @@ export default {
         }
       });
     },
+    *save({ payload: { post } }, { call, put }) {
+      console.log('in save');
+      console.log(post);
+      const response = yield call(postService.save, { post });
+    },
   },
   subscriptions: {
     setup({ dispatch, history }) {
