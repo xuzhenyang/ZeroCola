@@ -17,7 +17,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "https://www.easy-mock.com/mock/5922f2f59aba4141cf2b0a5b/zerocola/api",
+      "target": "http://localhost:8080/api",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
     }

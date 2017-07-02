@@ -21,7 +21,7 @@ public class AdminPostController {
     private PostService postService;
 
     @GetMapping("/posts")
-    @ApiOperation(value = "获取所有文章（打开状态）")
+    @ApiOperation(value = "获取所有文章")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "当前页数", defaultValue = "1", dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页条目数", defaultValue = "10", dataType = "Integer", paramType = "query")
