@@ -1,4 +1,5 @@
 import * as postService from '../services/posts';
+import { routerRedux } from 'dva/router';
 
 export default {
   namespace: 'posts',
@@ -29,6 +30,7 @@ export default {
     },
     *save({ payload: { post } }, { call, put }) {
       const response = yield call(postService.save, { ...post });
+      yield put(routerRedux.push('/admin/posts'));
     },
   },
   subscriptions: {

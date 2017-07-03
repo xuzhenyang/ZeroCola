@@ -5,6 +5,21 @@ import styles from './Posts.css';
 
 function Posts({ dispatch, posts }) {
 
+/**
+ * 时间格式转换
+ * timestamp -> yyyy-MM-dd hh:mm
+ * @param {*} timestamp 
+ */
+  function formateDate(timestamp) {
+    if (timestamp == null || timestamp == undefined) {
+      return "";
+    }
+    var date = new Date(timestamp);
+    var dateValue = [date.getFullYear(), date.getMonth(), date.getDate()].join('-');
+    var timeValue = date.getHours() + ':' + date.getMinutes();
+    return dateValue + ' ' + timeValue;
+  }
+
   const columns = [
     {
       title: '标题',
@@ -20,6 +35,9 @@ function Posts({ dispatch, posts }) {
       title: '创建时间',
       dataIndex: 'createTime',
       key: 'createTime',
+      render: (text, record) => {
+        return (<p>{formateDate(record.createTime)}</p>);
+      }
     },
     {
       title: '更新时间',
@@ -40,6 +58,7 @@ function Posts({ dispatch, posts }) {
   return (
     <div className={styles.normal}>
       <Table
+        bordered={true}
         columns={columns}
         dataSource={posts.postList}
         rowKey={record => record.id}
