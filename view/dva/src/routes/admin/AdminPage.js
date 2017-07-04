@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './AdminPage.css';
-import MyLayout from '../../components/admin/layout/MyLayout';
+import MyLayout from '../../components/admin/Layout/MyLayout';
 
 function AdminPage({ children }) {
   return (

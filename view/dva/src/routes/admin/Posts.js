@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './Posts.css';
-import PostComponent from '../../components/admin/posts/Posts';
+import PostComponent from '../../components/admin/Posts/Posts';
 
 function Posts() {
   return (

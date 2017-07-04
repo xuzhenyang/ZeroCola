@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './PostEditPage.css';
-import PostEditor from '../../components/admin/posts/PostEditor';
+import PostEditor from '../../components/admin/Posts/PostEditor';
 
 function PostEditPage() {
   return (
