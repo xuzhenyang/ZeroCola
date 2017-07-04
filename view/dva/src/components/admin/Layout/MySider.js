@@ -6,45 +6,46 @@ import styles from './MySider.css';
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
-const MySider = (props) => <Sider {...props} >
-    <div className={styles.logo} />
-    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1">
-            <Link to="/admin">
-                <Icon type="home" />
-                首页
-            </Link>
-        </Menu.Item>
-        <SubMenu
-            key="sub1"
-            title={<span><Icon type="file-text" /><span className="nav-text">文章管理</span></span>}
-        >
-            <Menu.Item key="2">
-                <Link to="/admin/posts">
-                    文章列表
-                </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-                <Link to="/admin/postEditor">
-                    新建
-                </Link>
-            </Menu.Item>
-        </SubMenu>
-        <Menu.Item key="4">
-            <Link to="/admin/tags">
-                <Icon type="tags-o" />
-                标签管理
-            </Link>
-        </Menu.Item>
-        {/*<SubMenu
-            key="sub2"
-            title={<span><Icon type="tags-o" /><span className="nav-text">标签管理</span></span>}
-        >
-            <Menu.Item key="5">标签列表</Menu.Item>
-            <Menu.Item key="6">新建</Menu.Item>
-        </SubMenu>*/}
-    </Menu>
-</Sider >
+function MySider(props) {
+
+    //获取url锚点 匹配Menu的key来保持默认高亮
+    const selectedKeys = window.location.hash.substring(1).split('?')[0];
+
+    return (
+        <Sider {...props} >
+            <div className={styles.logo} />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedKeys]} defaultOpenKeys={['sub1']}>
+                <Menu.Item key="/admin">
+                    <Link to="/admin">
+                        <Icon type="home" />
+                        首页
+                    </Link>
+                </Menu.Item>
+                <SubMenu
+                    key="sub1"
+                    title={<span><Icon type="file-text" /><span className="nav-text">文章管理</span></span>}
+                >
+                    <Menu.Item key="/admin/posts">
+                        <Link to="/admin/posts">
+                            文章列表
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="/admin/postEditor">
+                        <Link to="/admin/postEditor">
+                            新建
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
+                <Menu.Item key="/admin/tags">
+                    <Link to="/admin/tags">
+                        <Icon type="tags-o" />
+                        标签管理
+                    </Link>
+                </Menu.Item>
+            </Menu>
+        </Sider >
+    );
+}
 
 /** 注意：如果你想在 Sider 基础上进行包装，需要给自定义组件加上 __ANT_LAYOUT_SIDER = true 设置 */
 MySider.__ANT_LAYOUT_SIDER = true;
