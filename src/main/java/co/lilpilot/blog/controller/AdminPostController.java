@@ -48,7 +48,7 @@ public class AdminPostController {
     @ApiOperation(value = "创建文章")
     @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
     public Result<Post> createPost(@RequestBody Post post) {
-        return Result.success(postService.saveOrUpdate(post));
+        return Result.success(postService.createPost(post));
     }
 
     @PutMapping("/posts/{id}")
@@ -60,7 +60,7 @@ public class AdminPostController {
     public Result<Post> updatePost(
             @PathVariable Long id,
             @RequestBody Post post) {
-        return Result.success(postService.saveOrUpdate(post));
+        return Result.success(postService.updatePost(post));
     }
 
     @DeleteMapping("/posts/{id}")

@@ -1,12 +1,14 @@
 package co.lilpilot.blog.service;
 
 import co.lilpilot.blog.model.Post;
+import co.lilpilot.blog.model.enums.PostState;
 import co.lilpilot.blog.repository.PostRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -57,9 +59,26 @@ public class PostService {
         return postRepository.findByTitle(title);
     }
 
-    public Post saveOrUpdate(Post post) {
+    public Post createPost(Post post) {
         if (post == null) {
             throw new IllegalArgumentException("post is null");
+        }
+        if (StringUtils.isEmpty(post.getTitle()) || StringUtils.isEmpty(post.getContent())) {
+            throw new IllegalArgumentException("post is empty");
+        }
+        post.setStatus(PostState.OPEN.getValue());
+        //render markdown content
+        post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
+        return postRepository.save(post);
+    }
+
+    //TODO post内容不全会不会导致原有内容被覆盖
+    public Post updatePost(Post post) {
+        if (post == null) {
+            throw new IllegalArgumentException("post is null");
+        }
+        if (StringUtils.isEmpty(post.getTitle()) || StringUtils.isEmpty(post.getContent())) {
+            throw new IllegalArgumentException("post is empty");
         }
         //render markdown content
         post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
@@ -67,12 +86,12 @@ public class PostService {
     }
 
     public Post close(Post post) {
-        if (post == null) {
+        if (post == null || post.getId() == null) {
             throw new IllegalArgumentException("post is null");
         }
-        // 0:close 1:open
-        post.setStatus(0);
-        return postRepository.save(post);
+        Post target = getById(post.getId());
+        target.setStatus(PostState.CLOSED.getValue());
+        return postRepository.save(target);
     }
 
 }
