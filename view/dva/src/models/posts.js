@@ -4,27 +4,27 @@ import { routerRedux } from 'dva/router';
 export default {
   namespace: 'posts',
   state: {
-    postList: [],
+    postPage: {},
     post: {}
   },
   reducers: {
-    updatePostList(state, action) {
-      const {postList} = action.payload;
-      return { ...state, postList };
+    updatePostPage(state, action) {
+      const { postPage } = action.payload;
+      return { ...state, postPage };
     },
     updatePost(state, action) {
-      const {post} = action.payload;
+      const { post } = action.payload;
       return { ...state, post };
     },
   },
   effects: {
     *fetch({ payload: { page, pageSize } }, { call, put }) {
       const response = yield call(postService.fetch, { page, pageSize });
-      const data = response.data.data.content;
+      const data = response.data.data;
       yield put({
-        type: 'updatePostList',
+        type: 'updatePostPage',
         payload: {
-          postList: data
+          postPage: data
         }
       });
     },

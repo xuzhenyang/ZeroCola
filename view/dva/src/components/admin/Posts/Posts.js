@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Table, Button } from 'antd';
 import styles from './Posts.css';
 
-function Posts({ dispatch, posts }) {
+function Posts({ dispatch, postPage }) {
 
 /**
  * 时间格式转换
@@ -28,8 +28,8 @@ function Posts({ dispatch, posts }) {
     },
     {
       title: '状态',
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: 'statusDesc',
+      key: 'statusDesc',
     },
     {
       title: '创建时间',
@@ -60,7 +60,7 @@ function Posts({ dispatch, posts }) {
       <Table
         bordered={true}
         columns={columns}
-        dataSource={posts.postList}
+        dataSource={postPage.data}
         rowKey={record => record.id}
         pagination={false}
       />
@@ -68,8 +68,9 @@ function Posts({ dispatch, posts }) {
   );
 }
 
-function mapStateToProps({ posts }) {
-  return { posts };
+function mapStateToProps(state) {
+  const { postPage } = state.posts;
+  return { postPage: postPage };
 }
 
 export default connect(mapStateToProps)(Posts);
