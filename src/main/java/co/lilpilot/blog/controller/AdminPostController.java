@@ -38,7 +38,7 @@ public class AdminPostController {
         page = page < 1 ? 0 : page - 1;
         Page<Post> posts = postService.getAllPosts(page, pageSize);
         //convert PostPage -> PostListVOPage
-        CustomPage<PostListVO> customPage = new CustomPage<>(posts.getNumber() + 1, posts.getSize(), posts.getTotalPages(), posts.getContent().stream().map(post -> {
+        CustomPage<PostListVO> customPage = new CustomPage<>(posts.getNumber() + 1, posts.getSize(), posts.getTotalPages(), (int) posts.getTotalElements(), posts.getContent().stream().map(post -> {
             PostListVO postListVO = new PostListVO();
             BeanUtils.copyProperties(post, postListVO);
             postListVO.setStatusDesc(PostState.getDescByValue(postListVO.getStatus()));

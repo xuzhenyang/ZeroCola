@@ -5,11 +5,11 @@ import styles from './Posts.css';
 
 function Posts({ dispatch, postPage }) {
 
-/**
- * 时间格式转换
- * timestamp -> yyyy-MM-dd hh:mm
- * @param {*} timestamp 
- */
+  /**
+   * 时间格式转换
+   * timestamp -> yyyy-MM-dd hh:mm
+   * @param {*} timestamp 
+   */
   function formateDate(timestamp) {
     if (timestamp == null || timestamp == undefined) {
       return "";
@@ -18,6 +18,16 @@ function Posts({ dispatch, postPage }) {
     var dateValue = [date.getFullYear(), date.getMonth(), date.getDate()].join('-');
     var timeValue = date.getHours() + ':' + date.getMinutes();
     return dateValue + ' ' + timeValue;
+  }
+
+  function onPageChange(page, pageSize) {
+    dispatch({
+      type: 'posts/fetch',
+      payload: {
+        page: page,
+        pageSize: pageSize
+      }
+    });
   }
 
   const columns = [
@@ -62,7 +72,12 @@ function Posts({ dispatch, postPage }) {
         columns={columns}
         dataSource={postPage.data}
         rowKey={record => record.id}
-        pagination={false}
+        pagination={{
+          current: postPage.pageIndex,
+          total: postPage.totalNumber,
+          pageSize: postPage.pageSize,
+          onChange: onPageChange
+        }}
       />
     </div>
   );
