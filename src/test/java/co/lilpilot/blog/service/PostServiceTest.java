@@ -76,8 +76,8 @@ public class PostServiceTest {
      */
     @Test
     public void testGetById() throws Exception {
-        Post post = createPost("test");
-        Post result = postService.saveOrUpdate(post);
+        Post post = createPost("test", "test");
+        Post result = postService.createPost(post);
         Assert.assertEquals(result, postService.getById(result.getId()));
     }
 
@@ -87,10 +87,10 @@ public class PostServiceTest {
     @Test
     public void testGetAllPosts() throws Exception {
         Assert.assertEquals(0, postService.getAllPosts(0, 10).getContent().size());
-        Post post_1 = createPost("test1");
-        Post post_2 = createPost("test2");
-        postService.saveOrUpdate(post_1);
-        postService.saveOrUpdate(post_2);
+        Post post_1 = createPost("test1", "test1");
+        Post post_2 = createPost("test2", "test1");
+        postService.createPost(post_1);
+        postService.createPost(post_2);
         Assert.assertEquals(2, postService.getAllPosts(0, 10).getContent().size());
         // test for pageable
         Assert.assertEquals(1, postService.getAllPosts(0, 1).getContent().size());
@@ -107,9 +107,9 @@ public class PostServiceTest {
         Post post_1 = createPost("test1", "hello", 1);
         Post post_2 = createPost("test2", "hello", 0);
         Post post_3 = createPost("test2", "hello", 1);
-        postService.saveOrUpdate(post_1);
-        postService.saveOrUpdate(post_2);
-        postService.saveOrUpdate(post_3);
+        postService.createPost(post_1);
+        postService.createPost(post_2);
+        postService.createPost(post_3);
         Assert.assertEquals(2, postService.getAllOpenPosts(0, 10).getContent().size());
         // test for pageable
         Assert.assertEquals(1, postService.getAllPosts(0, 1).getContent().size());
@@ -130,10 +130,10 @@ public class PostServiceTest {
         Post post_3 = createPost("test6", "hello", 1);
         //keyword not mapped
         Post post_4 = createPost("hello", "test", 1);
-        postService.saveOrUpdate(post_1);
-        postService.saveOrUpdate(post_2);
-        postService.saveOrUpdate(post_3);
-        postService.saveOrUpdate(post_4);
+        postService.createPost(post_1);
+        postService.createPost(post_2);
+        postService.createPost(post_3);
+        postService.createPost(post_4);
         Assert.assertEquals(4, postService.getAllPosts(0, 10).getContent().size());
         Assert.assertEquals(2, postService.getOpenPostsByKeyword("test", 0, 10).getContent().size());
     }
@@ -146,7 +146,7 @@ public class PostServiceTest {
     @Test
     public void testGetOpenPostById() throws Exception {
         Post post = createPost("test", "test", 0);
-        post = postService.saveOrUpdate(post);
+        post = postService.createPost(post);
         Assert.assertNotNull(postService.getById(post.getId()));
         Assert.assertNull(postService.getOpenPostById(post.getId()));
     }
@@ -162,7 +162,7 @@ public class PostServiceTest {
         Tag tag = new Tag();
         tag.setName("tag_test");
         post.addTag(tag);
-        postService.saveOrUpdate(post);
+        postService.createPost(post);
         Assert.assertNotNull(postService.getByTitle("test"));
     }
 
@@ -177,7 +177,7 @@ public class PostServiceTest {
         Tag tag = new Tag();
         tag.setName("tag_test");
         post.addTag(tag);
-        postService.saveOrUpdate(post);
+        postService.createPost(post);
         Assert.assertNotNull(postService.getByTitle("test"));
         Assert.assertNotNull(tagService.getByName("tag_test"));
 
@@ -189,7 +189,7 @@ public class PostServiceTest {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(tag);
         post.setTags(tagList);
-        postService.saveOrUpdate(post);
+        postService.updatePost(post);
         Assert.assertNotNull(postService.getByTitle("test_2").getTags());
         Assert.assertEquals(1, postService.getByTitle("test_2").getTags().size());
         Assert.assertNotNull(tagService.getByName("tag_test_2"));
@@ -198,7 +198,7 @@ public class PostServiceTest {
         //test update
         Assert.assertNull(postService.getByTitle("update_test"));
         post.setTitle("update_test");
-        postService.saveOrUpdate(post);
+        postService.updatePost(post);
         Assert.assertNotNull(postService.getByTitle("update_test"));
     }
 
@@ -210,7 +210,7 @@ public class PostServiceTest {
     @Test
     public void testClose() throws Exception {
         Post post = createPost("test", "hello world", 1);
-        post = postService.saveOrUpdate(post);
+        post = postService.createPost(post);
         Assert.assertEquals(1, postService.getAllOpenPosts(0, 10).getContent().size());
         postService.close(post);
         Assert.assertEquals(0, postService.getAllOpenPosts(0, 10).getContent().size());

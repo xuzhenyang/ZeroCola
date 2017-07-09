@@ -66,7 +66,10 @@ public class PostService {
         if (StringUtils.isEmpty(post.getTitle()) || StringUtils.isEmpty(post.getContent())) {
             throw new IllegalArgumentException("post is empty");
         }
-        post.setStatus(PostState.OPEN.getValue());
+        //默认开放状态
+        if (post.getStatus() == null) {
+            post.setStatus(PostState.OPEN.getValue());
+        }
         //render markdown content
         post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);

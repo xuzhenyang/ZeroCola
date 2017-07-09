@@ -77,8 +77,8 @@ public class TagServiceTest {
         Tag tag = createTag("link_test");
         Post post_1 = PostServiceTest.createPost("test1", "hello1", tag);
         Post post_2 = PostServiceTest.createPost("test2", "hello2", tag);
-        postService.saveOrUpdate(post_1);
-        postService.saveOrUpdate(post_2);
+        postService.createPost(post_1);
+        postService.createPost(post_2);
         Tag result = tagService.getByName("link_test");
         Assert.assertEquals(2, result.getPosts().size());
     }

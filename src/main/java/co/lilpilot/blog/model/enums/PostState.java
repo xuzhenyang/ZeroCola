@@ -21,4 +21,13 @@ public enum PostState {
         this.desc = desc;
     }
 
+    public static String getDescByValue(Integer value) {
+        for (PostState postState : PostState.values()) {
+            if (postState.getValue().equals(value)) {
+                return postState.getDesc();
+            }
+        }
+        return "";
+    }
+
 }
