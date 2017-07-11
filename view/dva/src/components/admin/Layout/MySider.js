@@ -30,8 +30,8 @@ function MySider(props) {
                             文章列表
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="/admin/postEditor">
-                        <Link to="/admin/postEditor">
+                    <Menu.Item key="/admin/postCreate">
+                        <Link to="/admin/postCreate">
                             新建
                         </Link>
                     </Menu.Item>

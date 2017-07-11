@@ -7,41 +7,30 @@ const FormItem = Form.Item;
 
 const PostEditor = Form.create()((props) => {
 
-  const { form, dispatch, posts } = props;
+  const { form, post, handleSubmit, handleContentChange } = props;
 
   const { getFieldDecorator, getFieldsValue, validateFields } = form;
 
-  function handleSubmit(e) {
+  function onSubmit(e) {
     validateFields((err, values) => {
       if (!err) {
         const data = getFieldsValue();
-        dispatch({
-            type: 'posts/save',
-            payload: { 
-              post: data
-             },
-          });
+        handleSubmit(data);
       }
     });
   }
 
   function editContent(e) {
-    dispatch({
-      type: 'posts/updatePost',
-      payload: {
-        post: {
-          content: e.target.value,
-        },
-      },
-    });
+    handleContentChange(e.target.value);
   }
 
   return (
     <div className={styles.normal}>
-      <Form layout="horizontal" onSubmit={handleSubmit}>
+      <Form layout="horizontal" onSubmit={onSubmit}>
         <Button type="primary" htmlType="submit">Submit</Button>
         <FormItem label="Titile">
           {getFieldDecorator('title', {
+            initialValue: post ? post.title : '',
             rules: [{
               required: true,
               message: "please input title"
@@ -53,6 +42,7 @@ const PostEditor = Form.create()((props) => {
         <Row gutter={32}>
           <Col span={12}>
             {getFieldDecorator('content', {
+              initialValue: post ? post.content : '',
               rules: [{
                 required: true,
                 message: "please input content"
@@ -63,7 +53,7 @@ const PostEditor = Form.create()((props) => {
           </Col>
           <Col span={12}>
             <div style={{ overflowY: "scroll" }}>
-              <Markdown text={posts.post ? posts.post.content : ''} style={{ margin: '', maxWidth: 700, maxHeight: 700 }} />
+              <Markdown text={post ? post.content : ''} style={{ margin: '', maxWidth: 700, maxHeight: 700 }} />
             </div>
           </Col>
         </Row>
@@ -72,8 +62,4 @@ const PostEditor = Form.create()((props) => {
   );
 })
 
-function mapStateToProps({ posts }) {
-  return { posts };
-}
-
-export default connect(mapStateToProps)(PostEditor);
+export default PostEditor;
