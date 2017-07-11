@@ -4,6 +4,7 @@ import IndexPage from './routes/IndexPage';
 
 import Posts from "./routes/admin/Posts.js";
 import PostCreatePage from "./routes/admin/PostCreatePage.js";
+import PostEditPage from "./routes/admin/PostEditPage.js";
 
 import AdminPage from "./routes/admin/AdminPage.js";
 
@@ -14,6 +15,7 @@ function RouterConfig({ history }) {
       <Route path="/admin" component={AdminPage} >
         <Route path="posts" component={Posts} />
         <Route path="postCreate" component={PostCreatePage} />
+        <Route path="postEdit/:id" component={PostEditPage} />
       </Route>
     </Router>
   );

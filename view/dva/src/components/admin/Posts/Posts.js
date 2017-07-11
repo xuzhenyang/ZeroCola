@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Table, Button } from 'antd';
 import styles from './Posts.css';
+import { routerRedux } from 'dva/router';
 
 function Posts({ dispatch, postPage }) {
 
@@ -53,13 +54,16 @@ function Posts({ dispatch, postPage }) {
       title: '更新时间',
       dataIndex: 'updateTime',
       key: 'updateTime',
+      render: (text, record) => {
+        return (<p>{formateDate(record.updateTime)}</p>);
+      }
     },
     {
       title: '操作',
       key: 'operation',
       render: (text, record) => (
         <span>
-          <Button>test</Button>
+          <Button onClick={() => {dispatch(routerRedux.push('/admin/postEdit/' + record.id));}}>修改</Button>
         </span>
       )
     }
