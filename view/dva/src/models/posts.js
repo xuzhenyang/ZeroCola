@@ -51,6 +51,10 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
+        //首页
+        if (pathname === '/') {
+          dispatch({ type: 'fetch', payload: { page: 1, pageSize: 5 } });
+        }
         //文章列表页
         if (pathname === '/admin/posts') {
           dispatch({ type: 'fetch', payload: { page: 1, pageSize: 10 } });

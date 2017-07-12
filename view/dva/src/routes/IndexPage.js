@@ -1,21 +1,48 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
+import logo from '../assets/logo.jpg';
 
-function IndexPage() {
+const IndexPage = (props) => {
+
+  const { dispatch, posts } = props;
+  const postPage = posts.postPage;
+
+  const postList = [];
+  for (var index in postPage.data) {
+    postList.push(
+      <div>
+        <a href={"/posts/" + postPage.data[index].id}>
+          <h2>{postPage.data[index].title}</h2>
+        </a>
+        <div><span>{postPage.data[index].createTime}</span></div>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to dva!</h1>
-      <div className={styles.welcome} />
-      <ul className={styles.list}>
-        <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
-        <li><a href="https://github.com/dvajs/dva-docs/blob/master/v1/en-us/getting-started.md">Getting Started</a></li>
-      </ul>
-    </div>
+    <div>
+      <div>
+        <div><img className={styles.logo} src={logo} /></div>
+        <br />
+        <p>自豪地运行在树莓派上...</p>
+      </div>
+      <div>
+        <div>
+          <hr />
+          <h2>Latest Posts</h2>
+        </div>
+        <div>
+          {postList}
+        </div >
+        <div><a href="/posts">More</a></div>
+      </div >
+    </div >
   );
 }
 
-IndexPage.propTypes = {
-};
+function mapStateToProps(state) {
+  return { ...state };
+}
 
-export default connect()(IndexPage);
+export default connect(mapStateToProps)(IndexPage);
