@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
 import logo from '../assets/logo.jpg';
+import util from '../utils/util';
 
 const IndexPage = (props) => {
 
@@ -15,27 +16,26 @@ const IndexPage = (props) => {
         <a href={"/posts/" + postPage.data[index].id}>
           <h2>{postPage.data[index].title}</h2>
         </a>
-        <div><span>{postPage.data[index].createTime}</span></div>
+        <div><span>{util.formateDate(postPage.data[index].createTime)}</span></div>
       </div>
     );
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.main}>
+      <div className={styles.head}>
         <div><img className={styles.logo} src={logo} /></div>
-        <br />
-        <p>自豪地运行在树莓派上...</p>
+        <p>blablabla...</p>
       </div>
+      <hr className={styles.split} />
       <div>
         <div>
-          <hr />
-          <h2>Latest Posts</h2>
+          <h1>Latest Posts</h1>
         </div>
         <div>
           {postList}
         </div >
-        <div><a href="/posts">More</a></div>
+        <div className={styles.loadmore}><button href="/posts">More</button></div>
       </div >
     </div >
   );

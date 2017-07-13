@@ -3,23 +3,9 @@ import { connect } from 'dva';
 import { Table, Button } from 'antd';
 import styles from './Posts.css';
 import { routerRedux } from 'dva/router';
+import util from '../../../utils/util';
 
 function Posts({ dispatch, postPage }) {
-
-  /**
-   * 时间格式转换
-   * timestamp -> yyyy-MM-dd hh:mm
-   * @param {*} timestamp 
-   */
-  function formateDate(timestamp) {
-    if (timestamp == null || timestamp == undefined) {
-      return "";
-    }
-    var date = new Date(timestamp);
-    var dateValue = [date.getFullYear(), date.getMonth(), date.getDate()].join('-');
-    var timeValue = date.getHours() + ':' + date.getMinutes();
-    return dateValue + ' ' + timeValue;
-  }
 
   function onPageChange(page, pageSize) {
     dispatch({
@@ -47,7 +33,7 @@ function Posts({ dispatch, postPage }) {
       dataIndex: 'createTime',
       key: 'createTime',
       render: (text, record) => {
-        return (<p>{formateDate(record.createTime)}</p>);
+        return (<p>{util.formateDate(record.createTime)}</p>);
       }
     },
     {
@@ -55,7 +41,7 @@ function Posts({ dispatch, postPage }) {
       dataIndex: 'updateTime',
       key: 'updateTime',
       render: (text, record) => {
-        return (<p>{formateDate(record.updateTime)}</p>);
+        return (<p>{util.formateDate(record.updateTime)}</p>);
       }
     },
     {
@@ -63,7 +49,7 @@ function Posts({ dispatch, postPage }) {
       key: 'operation',
       render: (text, record) => (
         <span>
-          <Button onClick={() => {dispatch(routerRedux.push('/admin/postEdit/' + record.id));}}>修改</Button>
+          <Button onClick={() => { dispatch(routerRedux.push('/admin/postEdit/' + record.id)); }}>修改</Button>
         </span>
       )
     }

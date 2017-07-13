@@ -5,3 +5,32 @@
     width: 80px;
     height: 80px;
 }
+
+.main {
+    padding-top: 20px;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    font: 300 1em/1.8 "Helvetica Neue",Helvetica, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    -webkit-font-smoothing: antialiased;
+    color: #515862;
+}
+
+.head {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.head p{
+    margin: 10px 0;
+}
+
+.split {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.loadmore{
+    text-align: center;
+    margin-top: 40px;
+}
