@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 import styles from './IndexPage.css';
 import logo from '../assets/logo.jpg';
 import util from '../utils/util';
@@ -13,9 +14,9 @@ const IndexPage = (props) => {
   for (var index in postPage.data) {
     postList.push(
       <div>
-        <a href={"/posts/" + postPage.data[index].id}>
+        <Link to={"/posts/" + postPage.data[index].id}>
           <h2>{postPage.data[index].title}</h2>
-        </a>
+        </Link>
         <div><span>{util.formateDate(postPage.data[index].createTime)}</span></div>
       </div>
     );
@@ -29,9 +30,6 @@ const IndexPage = (props) => {
       </div>
       <hr className={styles.split} />
       <div>
-        <div>
-          <h1>Latest Posts</h1>
-        </div>
         <div>
           {postList}
         </div >

@@ -1,0 +1,21 @@
+.main{
+    text-align: center;
+}
+
+.container{
+    margin: 0 auto;
+    padding-top: 20px;
+    max-width: 1000px;
+}
+
+.title{
+    padding: 0 100px;
+    width: 100%;
+    position: relative;
+}
+
+.post {
+    text-align: left;
+    padding: 50px 80px;
+    margin-bottom: 30px;
+}

@@ -54,16 +54,26 @@ export default {
         //首页
         if (pathname === '/') {
           dispatch({ type: 'fetch', payload: { page: 1, pageSize: 5 } });
+          return;
+        }
+        //文章详情页
+        const detailMatch = pathToRegexp('/posts/:postId').exec(pathname)
+        if (detailMatch) {
+          const postId = detailMatch[1];
+          dispatch({ type: 'get', payload: { id: postId }});
+          return;
         }
         //文章列表页
         if (pathname === '/admin/posts') {
           dispatch({ type: 'fetch', payload: { page: 1, pageSize: 10 } });
+          return;
         }
         //文章修改页
-        const match = pathToRegexp('/admin/postEdit/:postId').exec(pathname)
-        if (match) {
-          const postId = match[1];
+        const editMatch = pathToRegexp('/admin/postEdit/:postId').exec(pathname)
+        if (editMatch) {
+          const postId = editMatch[1];
           dispatch({ type: 'get', payload: { id: postId }});
+          return;
         }
       });
     },
