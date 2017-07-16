@@ -56,6 +56,11 @@ export default {
           dispatch({ type: 'fetch', payload: { page: 1, pageSize: 5 } });
           return;
         }
+        //文章列表页
+        if (pathname === '/posts') {
+          dispatch({ type: 'fetch', payload: { page: 1, pageSize: 10 } });
+          return;
+        }
         //文章详情页
         const detailMatch = pathToRegexp('/posts/:postId').exec(pathname)
         if (detailMatch) {

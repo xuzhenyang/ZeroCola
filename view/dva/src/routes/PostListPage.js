@@ -1,14 +1,25 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import styles from './IndexPage.css';
+import { Pagination } from 'antd';
+// import styles from './PostPage.css';
 import logo from '../assets/logo.jpg';
 import util from '../utils/util';
 
-const IndexPage = (props) => {
+const PostListPage = (props) => {
 
   const { dispatch, posts } = props;
   const postPage = posts.postPage;
+
+  function onPageChange(page, pageSize) {
+    dispatch({
+      type: 'posts/fetch',
+      payload: {
+        page: page,
+        pageSize: pageSize
+      }
+    });
+  }
 
   const postList = [];
   for (var index in postPage.data) {
@@ -23,19 +34,17 @@ const IndexPage = (props) => {
   }
 
   return (
-    <div className={styles.main}>
-      <div className={styles.head}>
-        <div><img className={styles.logo} src={logo} /></div>
-        <p>blablabla...</p>
-      </div>
-      <hr className={styles.split} />
+    <div>
       <div>
-        <div>
-          {postList}
-        </div >
-        <div className={styles.loadmore}><Link to="/posts">More</Link></div>
+        {postList}
       </div >
-    </div >
+      <Pagination
+        defaultCurrent={1}
+        current={postPage.pageIndex}
+        total={postPage.totalNumber}
+        pageSize={postPage.pageSize}
+        onChange={onPageChange} />
+    </div>
   );
 }
 
@@ -43,4 +52,4 @@ function mapStateToProps(state) {
   return { ...state };
 }
 
-export default connect(mapStateToProps)(IndexPage);
+export default connect(mapStateToProps)(PostListPage);
