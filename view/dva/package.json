@@ -16,7 +16,7 @@
     "path-to-regexp": "^1.7.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
-    "react-markdown-plus": "^0.1.1-a"
+    "remarkable": "^1.7.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

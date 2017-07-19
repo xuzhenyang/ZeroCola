@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button, Form, Input, Row, Col } from 'antd';
-import Markdown from 'react-markdown-plus';
+import Remarkable from 'remarkable';
 import styles from './PostEditor.css';
 const FormItem = Form.Item;
 
@@ -23,6 +23,10 @@ const PostEditor = Form.create()((props) => {
   function editContent(e) {
     handleContentChange(e.target.value);
   }
+
+  var renderedContent = (new Remarkable({
+    highlight: function (/*str, lang*/) { return ''; }
+  })).render(post ? post.content : '');
 
   return (
     <div className={styles.normal}>
@@ -53,7 +57,8 @@ const PostEditor = Form.create()((props) => {
           </Col>
           <Col span={12}>
             <div style={{ overflowY: "scroll" }}>
-              <Markdown text={post ? post.content : ''} style={{ margin: '', maxWidth: 700, maxHeight: 700 }} />
+              <p style={{ margin: '', maxWidth: 700, maxHeight: 700 }} dangerouslySetInnerHTML={{ __html: renderedContent }}>
+              </p>
             </div>
           </Col>
         </Row>

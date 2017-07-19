@@ -1,5 +1,6 @@
 {
   "entry": "src/index.js",
+  "outputPath": "../../src/main/resources/static",
   "env": {
     "development": {
       "extraBabelPlugins": [
