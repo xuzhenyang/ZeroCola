@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Pagination } from 'antd';
-// import styles from './PostPage.css';
+import { Pagination, Row, Col } from 'antd';
+import styles from './PostListPage.css';
 import logo from '../assets/logo.jpg';
-import util from '../utils/util';
+import moment from 'moment';
 
 const PostListPage = (props) => {
 
@@ -25,17 +25,27 @@ const PostListPage = (props) => {
   for (var index in postPage.data) {
     postList.push(
       <div>
-        <Link to={"/posts/" + postPage.data[index].id}>
-          <h2>{postPage.data[index].title}</h2>
-        </Link>
-        <div><span>{util.formateDate(postPage.data[index].createTime)}</span></div>
+        <Row>
+          <Col span={8}>
+          <span>
+            {moment.unix(postPage.data[index].createTime / 1000).format('YYYY-MM-D')}
+          </span>
+          <span>&nbsp;&nbsp;·&nbsp; </span>
+          </Col>
+          <Col span={12}>
+          <Link to={"/posts/" + postPage.data[index].id}>
+            <p>{postPage.data[index].title}</p>
+          </Link>
+          </Col>
+        </Row>
       </div>
     );
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.main}>
+      <h1>Archive</h1>
+      <div className={styles.list}>
         {postList}
       </div >
       <Pagination

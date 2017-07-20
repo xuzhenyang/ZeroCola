@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import styles from './IndexPage.css';
 import logo from '../assets/logo.jpg';
-import util from '../utils/util';
+import moment from 'moment';
 
 const IndexPage = (props) => {
 
@@ -17,7 +17,7 @@ const IndexPage = (props) => {
         <Link to={"/posts/" + postPage.data[index].id}>
           <h2>{postPage.data[index].title}</h2>
         </Link>
-        <div><span>{util.formateDate(postPage.data[index].createTime)}</span></div>
+        <div><span>{moment.unix(postPage.data[index].createTime / 1000).format('YYYY-MM-D')}</span></div>
       </div>
     );
   }

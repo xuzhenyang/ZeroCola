@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import styles from './PostPage.css';
 import logo from '../assets/logo.jpg';
-import util from '../utils/util';
 
 const PostPage = (props) => {
 

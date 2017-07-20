@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Table, Button } from 'antd';
 import styles from './Posts.css';
 import { routerRedux } from 'dva/router';
-import util from '../../../utils/util';
+import moment from 'moment';
 
 function Posts({ dispatch, postPage }) {
 
@@ -33,7 +33,7 @@ function Posts({ dispatch, postPage }) {
       dataIndex: 'createTime',
       key: 'createTime',
       render: (text, record) => {
-        return (<p>{util.formateDate(record.createTime)}</p>);
+        return (<p>{moment.unix(record.createTime / 1000).format('YYYY-MM-D H:mm')}</p>);
       }
     },
     {
@@ -41,7 +41,9 @@ function Posts({ dispatch, postPage }) {
       dataIndex: 'updateTime',
       key: 'updateTime',
       render: (text, record) => {
-        return (<p>{util.formateDate(record.updateTime)}</p>);
+        if (record.updateTime) {
+            return (<p>{moment.unix(record.updateTime / 1000).format('YYYY-MM-D H:mm')}</p>);
+        }
       }
     },
     {
