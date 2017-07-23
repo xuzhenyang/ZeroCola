@@ -1,0 +1,13 @@
+.normal {
+}
+
+.nav {
+  text-align: right;
+  margin: 20px 15% 20px 0px;
+  font-size: 20px;
+}
+
+.link {
+  margin: 0px 10px;
+  color: #1abc9c;
+}

@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './AdminPage.css';
-import MyLayout from '../../components/admin/Layout/MyLayout';
+import MyAdminLayout from '../../components/admin/Layout/MyAdminLayout';
 
 function AdminPage({ children }) {
   return (
     <div className={styles.normal}>
-      <MyLayout>
+      <MyAdminLayout>
         {children}
-      </MyLayout>
+      </MyAdminLayout>
     </div>
   );
 }

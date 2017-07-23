@@ -23,19 +23,21 @@ const IndexPage = (props) => {
   }
 
   return (
-    <div className={styles.main}>
-      <div className={styles.head}>
-        <div><img className={styles.logo} src={logo} /></div>
-        <p>blablabla...</p>
-      </div>
-      <hr className={styles.split} />
-      <div>
+    <div>
+      <div className={styles.main}>
+        <div className={styles.head}>
+          <div><img className={styles.logo} src={logo} /></div>
+          <p>blablabla...</p>
+        </div>
+        <hr className={styles.split} />
         <div>
-          {postList}
+          <div>
+            {postList}
+          </div >
+          <div className={styles.loadmore}><Link to="/posts">More</Link></div>
         </div >
-        <div className={styles.loadmore}><Link to="/posts">More</Link></div>
       </div >
-    </div >
+    </div>
   );
 }
 
