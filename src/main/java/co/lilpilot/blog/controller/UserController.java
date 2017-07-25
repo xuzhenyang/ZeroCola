@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @PostMapping("/login")
+    @PostMapping("/api/v1/login")
     public Map<String, String> login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device) {
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(

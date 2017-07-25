@@ -61,3 +61,15 @@ POST /api/v1/comments
 // 访客记录
 GET /api/v1/records
 ```
+
+---
+
+## 前端认证
+
+### 访问页面前
+
+Route的onEnter中，通过effects获取status中的认证flag，未认证则跳转login页面
+
+### 异常处理
+
+异常统一处理，401则跳转login页面
