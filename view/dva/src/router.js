@@ -1,6 +1,8 @@
 import React from 'react';
 import { Router, Route, IndexRoute } from 'dva/router';
 
+import LoginPage from './routes/LoginPage';
+
 import HomePage from './routes/HomePage';
 import IndexPage from './routes/IndexPage';
 import PostListPage from './routes/PostListPage';
@@ -14,6 +16,7 @@ import PostEditPage from "./routes/admin/PostEditPage.js";
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
+      <Route path="/login" component={LoginPage}></Route>
       <Route path="/" component={HomePage} >
         <IndexRoute component={IndexPage} />
         <Route path="posts" component={PostListPage} />
