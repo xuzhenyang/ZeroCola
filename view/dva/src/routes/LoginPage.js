@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Form, Input, Icon, Button } from 'antd';
-// import styles from './IndexPage.css';
+import styles from './LoginPage.css';
 const FormItem = Form.Item;
 
 const LoginPage = (props) => {
@@ -31,8 +31,8 @@ const LoginPage = (props) => {
   }
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
+    <div className={styles.normal}>
+      <Form onSubmit={handleSubmit} className={styles.login_form}>
         <FormItem>
           {getFieldDecorator('username', {
             rules: [{
@@ -53,7 +53,7 @@ const LoginPage = (props) => {
             <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
             )}
         </FormItem>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" className={styles.button}>
           Log in
           </Button>
       </Form>

@@ -1,0 +1,16 @@
+.normal {
+}
+
+.login_form {
+    margin: 0 auto;
+    max-width: 300px;
+    /* 垂直居中 */
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.button {
+    width: 100%;
+}
