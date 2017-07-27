@@ -1,7 +1,14 @@
 import request from '../utils/request';
+import { tokenKey } from '../utils/config';
 
 export async function fetch({ page, pageSize }) {
-  return request(`/api/v1/admin/posts?page=${page}&pageSize=${pageSize}`);
+  const token = window.localStorage.getItem(tokenKey);
+  return request(`/api/v1/admin/posts?page=${page}&pageSize=${pageSize}`, {
+    method: 'get',
+    headers: new Headers({
+      "Authorization": `${token}`
+    })
+  });
 }
 
 export function save(post) {
@@ -29,6 +36,6 @@ export async function getPosts({ page, pageSize }) {
   return request(`/api/v1/posts?page=${page}&pageSize=${pageSize}`);
 }
 
-export async function getPostById( { id } ) {
+export async function getPostById({ id }) {
   return request(`/api/v1/admin/posts/${id}`);
 }

@@ -1,6 +1,8 @@
 package co.lilpilot.blog.controller;
 
 import co.lilpilot.blog.security.JwtTokenUtil;
+import co.lilpilot.blog.service.UserService;
+import co.lilpilot.blog.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +31,8 @@ public class UserController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/api/v1/login")
     public Map<String, String> login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device) {
@@ -48,5 +53,14 @@ public class UserController {
         HashMap<String, String> result = new HashMap<>();
         result.put("token", token);
         return result;
+    }
+
+    @PostMapping("/api/v1/register")
+    public Result<String> register(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+            return Result.fail("500", "用户名或密码不能为空");
+        }
+        userService.createUser(username, password);
+        return Result.success("成功注册");
     }
 }

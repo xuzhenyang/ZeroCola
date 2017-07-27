@@ -4,7 +4,9 @@ import co.lilpilot.blog.model.User;
 import co.lilpilot.blog.repository.UserRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by lilpilot on 2017/5/2.
@@ -14,6 +16,17 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public User createUser(String username, String password) {
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+            throw new IllegalArgumentException("username or password is empty");
+        }
+        User user = new User();
+        user.setUsername(username);
+        user.setPasswordHashed(new BCryptPasswordEncoder().encode(password));
+        user.setRole("USER");
+        return saveOrUpdate(user);
+    }
 
     public User saveOrUpdate(User user) {
         if (user == null) {

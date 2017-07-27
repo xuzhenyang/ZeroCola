@@ -6,11 +6,11 @@ import './index.css';
 const app = dva({
     onError(e, dispatch) {
         console.log(e);
-        dispatch({
-            type: 'user/logout'
-        });
         if (e.message == "Unauthorized") {
             message.warning("Please login");
+            dispatch({
+                type: 'user/relogin'
+            });
         }
     }
 });
