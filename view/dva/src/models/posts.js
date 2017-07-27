@@ -53,12 +53,12 @@ export default {
       return history.listen(({ pathname }) => {
         //首页
         if (pathname === '/') {
-          dispatch({ type: 'fetch', payload: { page: 1, pageSize: 5 } });
+          dispatch({ type: 'getPosts', payload: { page: 1, pageSize: 5 } });
           return;
         }
         //文章列表页
         if (pathname === '/posts') {
-          dispatch({ type: 'fetch', payload: { page: 1, pageSize: 10 } });
+          dispatch({ type: 'getPosts', payload: { page: 1, pageSize: 10 } });
           return;
         }
         //文章详情页

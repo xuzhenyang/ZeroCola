@@ -13,7 +13,7 @@ const PostListPage = (props) => {
 
   function onPageChange(page, pageSize) {
     dispatch({
-      type: 'posts/fetch',
+      type: 'posts/getPosts',
       payload: {
         page: page,
         pageSize: pageSize

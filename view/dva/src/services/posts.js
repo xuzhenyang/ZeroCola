@@ -25,6 +25,10 @@ export function update(post) {
   })
 }
 
+export async function getPosts({ page, pageSize }) {
+  return request(`/api/v1/posts?page=${page}&pageSize=${pageSize}`);
+}
+
 export async function getPostById( { id } ) {
   return request(`/api/v1/admin/posts/${id}`);
 }
