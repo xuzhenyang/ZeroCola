@@ -24,7 +24,7 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setPasswordHashed(new BCryptPasswordEncoder().encode(password));
-        user.setRole("USER");
+        user.setRole("ADMIN");
         return saveOrUpdate(user);
     }
 

@@ -13,7 +13,15 @@ import AdminPostsPage from "./routes/admin/Posts.js";
 import PostCreatePage from "./routes/admin/PostCreatePage.js";
 import PostEditPage from "./routes/admin/PostEditPage.js";
 
-function RouterConfig({ history }) {
+function RouterConfig({ history, app }) {
+  function requireAuth(nextState, replace, callback) {
+    console.log('requireAuth');
+    app._store.dispatch({
+      type: 'user/checkAuth',
+      payload: {},
+      onComplete: callback
+    });
+  }
   return (
     <Router history={history}>
       <Route path="/login" component={LoginPage}></Route>
@@ -22,7 +30,7 @@ function RouterConfig({ history }) {
         <Route path="posts" component={PostListPage} />
         <Route path="posts/:id" component={PostPage} />
       </Route>
-      <Route path="/admin" component={AdminPage} >
+      <Route path="/admin" component={AdminPage} onEnter={requireAuth}>
         <Route path="posts" component={AdminPostsPage} />
         <Route path="postCreate" component={PostCreatePage} />
         <Route path="postEdit/:id" component={PostEditPage} />

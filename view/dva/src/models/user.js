@@ -10,6 +10,15 @@ export default {
   reducers: {
   },
   effects: {
+    *checkAuth({ payload, onComplete }, { put }) {
+      const token = window.localStorage.getItem(tokenKey);
+      if (token) {
+        onComplete();
+      }
+      else {
+        yield put({ type: 'relogin' });
+      }
+    },
     *login({ payload: { username, password } }, { call, put }) {
       const response = yield call(userService.login, { username, password });
       const token = response.data.token;
