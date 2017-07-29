@@ -23,11 +23,11 @@ public class PostService {
     @Autowired
     private MarkdownService markdownService;
 
-    public Page<Post> getAllPosts(Integer page, Integer pageSize) {
+    public Page<Post> getPosts(Integer page, Integer pageSize) {
         return postRepository.findAll(new PageRequest(page, pageSize));
     }
 
-    public Page<Post> getAllOpenPosts(Integer page, Integer pageSize) {
+    public Page<Post> getOpenPosts(Integer page, Integer pageSize) {
         return postRepository.findAllOpenPosts(new PageRequest(page, pageSize));
     }
 

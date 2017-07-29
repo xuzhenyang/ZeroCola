@@ -9,7 +9,7 @@ function Posts({ dispatch, postPage }) {
 
   function onPageChange(page, pageSize) {
     dispatch({
-      type: 'posts/fetch',
+      type: 'posts/getAdminPosts',
       payload: {
         page: page,
         pageSize: pageSize

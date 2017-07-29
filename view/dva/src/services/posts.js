@@ -1,9 +1,19 @@
 import request from '../utils/request';
 import { tokenKey } from '../utils/config';
 
-export async function fetch({ page, pageSize }) {
+export async function getAdminPosts({ page, pageSize }) {
   const token = window.localStorage.getItem(tokenKey);
   return request(`/api/v1/admin/posts?page=${page}&pageSize=${pageSize}`, {
+    method: 'get',
+    headers: new Headers({
+      "Authorization": `${token}`
+    })
+  });
+}
+
+export async function getAdminPostById({ id }) {
+  const token = window.localStorage.getItem(tokenKey);
+  return request(`/api/v1/admin/posts/${id}`, {
     method: 'get',
     headers: new Headers({
       "Authorization": `${token}`
@@ -41,5 +51,5 @@ export async function getPosts({ page, pageSize }) {
 }
 
 export async function getPostById({ id }) {
-  return request(`/api/v1/admin/posts/${id}`);
+  return request(`/api/v1/posts/${id}`);
 }

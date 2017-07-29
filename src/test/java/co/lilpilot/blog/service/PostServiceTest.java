@@ -82,37 +82,37 @@ public class PostServiceTest {
     }
 
     /**
-     * Method: getAllPosts()
+     * Method: getPosts()
      */
     @Test
     public void testGetAllPosts() throws Exception {
-        Assert.assertEquals(0, postService.getAllPosts(0, 10).getContent().size());
+        Assert.assertEquals(0, postService.getPosts(0, 10).getContent().size());
         Post post_1 = createPost("test1", "test1");
         Post post_2 = createPost("test2", "test1");
         postService.createPost(post_1);
         postService.createPost(post_2);
-        Assert.assertEquals(2, postService.getAllPosts(0, 10).getContent().size());
+        Assert.assertEquals(2, postService.getPosts(0, 10).getContent().size());
         // test for pageable
-        Assert.assertEquals(1, postService.getAllPosts(0, 1).getContent().size());
+        Assert.assertEquals(1, postService.getPosts(0, 1).getContent().size());
     }
 
     /**
      *
-     * Method: getAllOpenPosts(Integer page, Integer pageSize)
+     * Method: getOpenPosts(Integer page, Integer pageSize)
      *
      */
     @Test
     public void testGetAllOpenPosts() throws Exception {
-        Assert.assertEquals(0, postService.getAllOpenPosts(0, 10).getContent().size());
+        Assert.assertEquals(0, postService.getOpenPosts(0, 10).getContent().size());
         Post post_1 = createPost("test1", "hello", 1);
         Post post_2 = createPost("test2", "hello", 0);
         Post post_3 = createPost("test2", "hello", 1);
         postService.createPost(post_1);
         postService.createPost(post_2);
         postService.createPost(post_3);
-        Assert.assertEquals(2, postService.getAllOpenPosts(0, 10).getContent().size());
+        Assert.assertEquals(2, postService.getOpenPosts(0, 10).getContent().size());
         // test for pageable
-        Assert.assertEquals(1, postService.getAllPosts(0, 1).getContent().size());
+        Assert.assertEquals(1, postService.getPosts(0, 1).getContent().size());
 
     }
 
@@ -134,7 +134,7 @@ public class PostServiceTest {
         postService.createPost(post_2);
         postService.createPost(post_3);
         postService.createPost(post_4);
-        Assert.assertEquals(4, postService.getAllPosts(0, 10).getContent().size());
+        Assert.assertEquals(4, postService.getPosts(0, 10).getContent().size());
         Assert.assertEquals(2, postService.getOpenPostsByKeyword("test", 0, 10).getContent().size());
     }
 
@@ -211,9 +211,9 @@ public class PostServiceTest {
     public void testClose() throws Exception {
         Post post = createPost("test", "hello world", 1);
         post = postService.createPost(post);
-        Assert.assertEquals(1, postService.getAllOpenPosts(0, 10).getContent().size());
+        Assert.assertEquals(1, postService.getOpenPosts(0, 10).getContent().size());
         postService.close(post);
-        Assert.assertEquals(0, postService.getAllOpenPosts(0, 10).getContent().size());
+        Assert.assertEquals(0, postService.getOpenPosts(0, 10).getContent().size());
     }
 
 

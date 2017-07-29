@@ -36,7 +36,7 @@ public class AdminPostController {
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer pageSize) {
         page = page < 1 ? 0 : page - 1;
-        Page<Post> posts = postService.getAllPosts(page, pageSize);
+        Page<Post> posts = postService.getPosts(page, pageSize);
         //convert PostPage -> PostListVOPage
         CustomPage<PostListVO> customPage = new CustomPage<>(posts.getNumber() + 1, posts.getSize(), posts.getTotalPages(), (int) posts.getTotalElements(), posts.getContent().stream().map(post -> {
             PostListVO postListVO = new PostListVO();

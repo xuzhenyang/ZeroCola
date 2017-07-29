@@ -19,8 +19,8 @@ export default {
     },
   },
   effects: {
-    *fetch({ payload: { page, pageSize } }, { call, put }) {
-      const response = yield call(postService.fetch, { page, pageSize });
+    *getAdminPosts({ payload: { page, pageSize } }, { call, put }) {
+      const response = yield call(postService.getAdminPosts, { page, pageSize });
       const data = response.data.data;
       yield put({
         type: 'updatePostPage',
@@ -29,7 +29,27 @@ export default {
         }
       });
     },
-    *get({ payload: { id } }, { call, put }) {
+    *getAdminPostById({ payload: { id } }, { call, put }) {
+      const response = yield call(postService.getAdminPostById, { id });
+      const data = response.data.data;
+      yield put({
+        type: 'updatePost',
+        payload: {
+          post: data
+        }
+      });
+    },
+    *getPosts({ payload: { page, pageSize } }, { call, put }) {
+      const response = yield call(postService.getPosts, { page, pageSize });
+      const data = response.data.data;
+      yield put({
+        type: 'updatePostPage',
+        payload: {
+          postPage: data
+        }
+      });
+    },
+    *getPostById({ payload: { id } }, { call, put }) {
       const response = yield call(postService.getPostById, { id });
       const data = response.data.data;
       yield put({
@@ -67,19 +87,19 @@ export default {
         const detailMatch = pathToRegexp('/posts/:postId').exec(pathname)
         if (detailMatch) {
           const postId = detailMatch[1];
-          dispatch({ type: 'get', payload: { id: postId } });
+          dispatch({ type: 'getPostById', payload: { id: postId } });
           return;
         }
         //文章列表页
         if (pathname === '/admin/posts') {
-          dispatch({ type: 'fetch', payload: { page: 1, pageSize: 10 } });
+          dispatch({ type: 'getAdminPosts', payload: { page: 1, pageSize: 10 } });
           return;
         }
         //文章修改页
         const editMatch = pathToRegexp('/admin/postEdit/:postId').exec(pathname)
         if (editMatch) {
           const postId = editMatch[1];
-          dispatch({ type: 'get', payload: { id: postId } });
+          dispatch({ type: 'getAdminPostById', payload: { id: postId } });
           return;
         }
       });
