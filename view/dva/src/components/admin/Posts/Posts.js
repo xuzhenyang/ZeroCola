@@ -5,7 +5,7 @@ import styles from './Posts.css';
 import { routerRedux } from 'dva/router';
 import moment from 'moment';
 
-function Posts({ dispatch, postPage }) {
+function Posts({ dispatch, adminPostPage }) {
 
   function onPageChange(page, pageSize) {
     dispatch({
@@ -62,12 +62,12 @@ function Posts({ dispatch, postPage }) {
       <Table
         bordered={true}
         columns={columns}
-        dataSource={postPage.data}
+        dataSource={adminPostPage.data}
         rowKey={record => record.id}
         pagination={{
-          current: postPage.pageIndex,
-          total: postPage.totalNumber,
-          pageSize: postPage.pageSize,
+          current: adminPostPage.pageIndex,
+          total: adminPostPage.totalNumber,
+          pageSize: adminPostPage.pageSize,
           onChange: onPageChange
         }}
       />
@@ -76,8 +76,8 @@ function Posts({ dispatch, postPage }) {
 }
 
 function mapStateToProps(state) {
-  const { postPage } = state.posts;
-  return { postPage: postPage };
+  const { adminPostPage } = state.posts;
+  return { adminPostPage: adminPostPage };
 }
 
 export default connect(mapStateToProps)(Posts);

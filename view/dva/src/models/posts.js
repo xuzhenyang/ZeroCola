@@ -5,10 +5,15 @@ import pathToRegexp from 'path-to-regexp';
 export default {
   namespace: 'posts',
   state: {
+    adminPostPage: {},
     postPage: {},
     post: {}
   },
   reducers: {
+    updateAdminPostPage(state, action) {
+      const { adminPostPage } = action.payload;
+      return { ...state, adminPostPage };
+    },
     updatePostPage(state, action) {
       const { postPage } = action.payload;
       return { ...state, postPage };
@@ -23,9 +28,9 @@ export default {
       const response = yield call(postService.getAdminPosts, { page, pageSize });
       const data = response.data.data;
       yield put({
-        type: 'updatePostPage',
+        type: 'updateAdminPostPage',
         payload: {
-          postPage: data
+          adminPostPage: data
         }
       });
     },
