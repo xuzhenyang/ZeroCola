@@ -15,7 +15,6 @@ import PostEditPage from "./routes/admin/PostEditPage.js";
 
 function RouterConfig({ history, app }) {
   function requireAuth(nextState, replace, callback) {
-    console.log('requireAuth');
     app._store.dispatch({
       type: 'user/checkAuth',
       payload: {},

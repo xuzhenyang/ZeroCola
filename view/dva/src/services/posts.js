@@ -12,10 +12,12 @@ export async function fetch({ page, pageSize }) {
 }
 
 export function save(post) {
+  const token = window.localStorage.getItem(tokenKey);
   return request('/api/v1/admin/posts', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      "Authorization": `${token}`
     },
     body: JSON.stringify(post),
   });
@@ -23,10 +25,12 @@ export function save(post) {
 
 export function update(post) {
   const postId = post.id;
+  const token = window.localStorage.getItem(tokenKey);
   return request(`/api/v1/admin/posts/${postId}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      "Authorization": `${token}`
     },
     body: JSON.stringify(post),
   })

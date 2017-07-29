@@ -41,7 +41,9 @@ export default {
     },
     *save({ payload: { post } }, { call, put }) {
       const response = yield call(postService.save, { ...post });
-      yield put(routerRedux.push('/admin/posts'));
+      if (response.data) {
+        yield put(routerRedux.push('/admin/posts'));
+      }
     },
     *update({ payload: { post } }, { call, put }) {
       const response = yield call(postService.update, { ...post });
@@ -65,7 +67,7 @@ export default {
         const detailMatch = pathToRegexp('/posts/:postId').exec(pathname)
         if (detailMatch) {
           const postId = detailMatch[1];
-          dispatch({ type: 'get', payload: { id: postId }});
+          dispatch({ type: 'get', payload: { id: postId } });
           return;
         }
         //文章列表页
@@ -77,7 +79,7 @@ export default {
         const editMatch = pathToRegexp('/admin/postEdit/:postId').exec(pathname)
         if (editMatch) {
           const postId = editMatch[1];
-          dispatch({ type: 'get', payload: { id: postId }});
+          dispatch({ type: 'get', payload: { id: postId } });
           return;
         }
       });

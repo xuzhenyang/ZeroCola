@@ -12,6 +12,7 @@ const PostEditor = Form.create()((props) => {
   const { getFieldDecorator, getFieldsValue, validateFields } = form;
 
   function onSubmit(e) {
+    e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
         const data = getFieldsValue();
