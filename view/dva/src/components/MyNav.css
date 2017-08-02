@@ -11,3 +11,9 @@
   margin: 0px 10px;
   color: #1abc9c;
 }
+
+.link:hover {
+  border-bottom-color: #555;
+  color: #555;
+  text-decoration: none;
+}

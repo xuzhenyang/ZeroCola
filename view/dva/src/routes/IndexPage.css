@@ -28,7 +28,32 @@
     width: 70%;
 }
 
-.loadmore{
+.post h2{
+    font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font-weight: 100;
+    color: #000;
+    line-height: 1.35;
+
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+    font-size: 1.8em;
+}
+
+.post p{
+    margin-bottom: 1.2em;
+    font-size: 1.2em;
+}
+
+.loadmore {
     text-align: center;
     margin-top: 40px;
+    color: #1abc9c;
+    font-size: 20px;
+}
+
+.loadmore:hover {
+  border-bottom-color: #555;
+  color: #555;
+  text-decoration: none;
 }

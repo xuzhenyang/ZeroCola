@@ -13,11 +13,13 @@ const IndexPage = (props) => {
   const postList = [];
   for (var index in postPage.data) {
     postList.push(
-      <div>
+      <div className={styles.post}>
         <Link to={"/posts/" + postPage.data[index].id}>
           <h2>{postPage.data[index].title}</h2>
         </Link>
-        <div><span>{moment.unix(postPage.data[index].createTime / 1000).format('YYYY-MM-D')}</span></div>
+        <div>
+          <p>{moment.unix(postPage.data[index].createTime / 1000).format('YYYY-MM-D')}</p>
+        </div>
       </div>
     );
   }
@@ -34,7 +36,7 @@ const IndexPage = (props) => {
           <div>
             {postList}
           </div >
-          <div className={styles.loadmore}><Link to="/posts">More</Link></div>
+          <div><Link className={styles.loadmore} to="/posts">More</Link></div>
         </div >
       </div >
     </div>

@@ -5,17 +5,77 @@
 .container{
     margin: 0 auto;
     padding-top: 20px;
-    max-width: 1000px;
+    max-width: 60%;
 }
 
 .title{
-    padding: 0 100px;
-    width: 100%;
     position: relative;
 }
 
-.post {
+.title h1{
+    font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font-weight: 100;
+    color: #000;
+    line-height: 1.35;
+
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+    font-size: 2em;
+}
+
+.date {
+    margin-top: 30px;
+    font-size: 1.2em;
+}
+
+.content {
     text-align: left;
-    padding: 50px 80px;
-    margin-bottom: 30px;
+    padding: 20px 50px;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6{
+    font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font-weight: 100;
+    color: #000;
+    line-height: 1.35;
+
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+}
+
+.content p {
+    margin-bottom: 1.2em;
+    font-size: 16px;
+}
+
+.content p, .content pre,.content ul,.content ol,.content dl,.content form,.content hr,.content table{
+    margin-bottom: 1.2em;
+}
+
+/* 代码片断 */
+.content pre, .content code, .content pre .content tt {
+    font-family: Courier, 'Courier New', monospace;
+}
+
+.content pre {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 1em 1.5em;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+}
+
+.content strong, .content b {
+    font-weight: bold;
+    color: #000;
+}
+
+/* 一致化 horizontal rule */
+.content hr {
+  border: none;
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 0.8em;
+  height: 10px;
 }

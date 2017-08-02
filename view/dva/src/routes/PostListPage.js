@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Pagination, Row, Col } from 'antd';
 import styles from './PostListPage.css';
-import logo from '../assets/logo.jpg';
 import moment from 'moment';
 
 const PostListPage = (props) => {
@@ -26,15 +25,14 @@ const PostListPage = (props) => {
     postList.push(
       <div>
         <Row>
-          <Col span={8}>
-          <span>
-            {moment.unix(postPage.data[index].createTime / 1000).format('YYYY-MM-D')}
-          </span>
-          <span>&nbsp;&nbsp;·&nbsp; </span>
+          <Col span={6} offset={4}>
+          <p>
+            {moment.unix(postPage.data[index].createTime / 1000).format('YYYY-MM-DD')}
+          </p>
           </Col>
           <Col span={12}>
           <Link to={"/posts/" + postPage.data[index].id}>
-            <p>{postPage.data[index].title}</p>
+            <h4>{postPage.data[index].title}</h4>
           </Link>
           </Col>
         </Row>
@@ -44,8 +42,10 @@ const PostListPage = (props) => {
 
   return (
     <div className={styles.main}>
-      <h1>Archive</h1>
-      <div className={styles.list}>
+      <div className={styles.head}>
+        <h1>Archive</h1>
+      </div>
+      <div className={styles.posts}>
         {postList}
       </div >
       <Pagination
