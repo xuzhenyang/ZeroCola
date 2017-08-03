@@ -1,3 +1,53 @@
 
 .normal {
 }
+
+.render {
+    text-align: left;
+}
+
+.render h1, .render h2, .render h3, .render h4, .render h5, .render h6{
+    font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+    font-weight: 100;
+    color: #000;
+    line-height: 1.35;
+
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+    line-height: 1.35;
+}
+
+.render p {
+    margin-bottom: 1.2em;
+    font-size: 14px;
+}
+
+.render p, .render pre,.render ul,.render ol,.render dl,.render form,.render hr,.render table{
+    margin-bottom: 1.2em;
+}
+
+/* 代码片断 */
+.render pre, .render code, .render pre .render tt {
+    font-family: Courier, 'Courier New', monospace;
+}
+
+.render pre {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 1em 1.5em;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+}
+
+.render strong, .render b {
+    font-weight: bold;
+    color: #000;
+}
+
+/* 一致化 horizontal rule */
+.render hr {
+  border: none;
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 0.8em;
+  height: 10px;
+}

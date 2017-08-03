@@ -58,8 +58,10 @@ const PostEditor = Form.create()((props) => {
           </Col>
           <Col span={12}>
             <div style={{ overflowY: "scroll" }}>
-              <p style={{ margin: '', maxWidth: 700, maxHeight: 700 }} dangerouslySetInnerHTML={{ __html: renderedContent }}>
-              </p>
+              <div className={styles.render}>
+                <p style={{ margin: '', maxWidth: 700, maxHeight: 700 }} dangerouslySetInnerHTML={{ __html: renderedContent }}>
+                </p>
+              </div>
             </div>
           </Col>
         </Row>
