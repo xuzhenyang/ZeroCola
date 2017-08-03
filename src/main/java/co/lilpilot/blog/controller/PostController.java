@@ -9,6 +9,7 @@ import co.lilpilot.blog.util.Result;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/api/v1")
+@Slf4j
 public class PostController {
 
     @Autowired

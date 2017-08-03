@@ -3,6 +3,7 @@ package co.lilpilot.blog.controller;
 import co.lilpilot.blog.security.JwtTokenUtil;
 import co.lilpilot.blog.service.UserService;
 import co.lilpilot.blog.util.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +24,7 @@ import java.util.Map;
  * Created by lilpilot on 2017/5/2.
  */
 @RestController
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -43,6 +45,7 @@ public class UserController {
                         password
                 )
         );
+        log.info("用户 {} 登录成功", username);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // Reload password post-security so we can generate token
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);

@@ -25,3 +25,6 @@ nbdist/
 
 ### node ###
 /view/dva/node_modules/
+
+### log ###
+/logs/
