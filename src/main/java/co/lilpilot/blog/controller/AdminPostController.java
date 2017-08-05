@@ -9,6 +9,7 @@ import co.lilpilot.blog.util.Result;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/api/v1/admin")
+@Slf4j
 public class AdminPostController {
 
     @Autowired
@@ -62,6 +64,7 @@ public class AdminPostController {
     @ApiOperation(value = "创建文章")
     @ApiImplicitParam(name = "post", value = "文章POJO", required = true, dataType = "Post", paramType = "body")
     public Result<Post> createPost(@RequestBody Post post) {
+        log.info("创建文章 title : {}", post.getTitle());
         return Result.success(postService.createPost(post));
     }
 
@@ -74,6 +77,7 @@ public class AdminPostController {
     public Result<Post> updatePost(
             @PathVariable Long id,
             @RequestBody Post post) {
+        log.info("更新文章 title : {}", post.getTitle());
         return Result.success(postService.updatePost(post));
     }
 
@@ -85,6 +89,7 @@ public class AdminPostController {
         if (post == null) {
             return Result.fail("500", "文章不存在");
         }
+        log.info("删除文章 title : {}", post.getTitle());
         return Result.success(postService.close(post));
     }
 

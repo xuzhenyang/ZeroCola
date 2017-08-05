@@ -64,6 +64,7 @@ public class UserController {
             return Result.fail("500", "用户名或密码不能为空");
         }
         userService.createUser(username, password);
+        log.info("注册用户 用户名 : {}", username);
         return Result.success("成功注册");
     }
 }

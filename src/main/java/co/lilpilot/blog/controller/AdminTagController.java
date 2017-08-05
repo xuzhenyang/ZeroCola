@@ -6,6 +6,7 @@ import co.lilpilot.blog.util.Result;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/v1/admin")
+@Slf4j
 public class AdminTagController {
 
     @Autowired
@@ -24,6 +26,7 @@ public class AdminTagController {
     @ApiOperation(value = "创建新标签")
     @ApiImplicitParam(name = "tag", value = "标签类", required = true, dataType = "Tag", paramType = "body")
     public Result<Tag> createTag(@RequestBody Tag tag) {
+        log.info("创建标签 name : {}", tag.getName());
         return Result.success(tagService.saveOrUpdate(tag));
     }
 
@@ -36,6 +39,7 @@ public class AdminTagController {
     public Result<Tag> updateTag(
             @PathVariable Long id,
             @RequestBody Tag tag) {
+        log.info("更新标签 name : {}", tag.getName());
         return Result.success(tagService.saveOrUpdate(tag));
     }
 
