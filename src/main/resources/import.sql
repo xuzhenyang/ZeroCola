@@ -1,0 +1,1 @@
+INSERT INTO tags(name, create_time) VALUES ('tag1', '2017-08-06 17:32:54');
