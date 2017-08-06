@@ -16,6 +16,7 @@ const app = dva({
 });
 
 app.model(require("./models/posts"));
+app.model(require("./models/tags"));
 app.model(require("./models/user"));
 
 // 2. Plugins

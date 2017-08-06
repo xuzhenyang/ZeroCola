@@ -1,22 +1,39 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Button, Form, Input, Row, Col } from 'antd';
+import { Button, Form, Input, Row, Col, Select } from 'antd';
 import Remarkable from 'remarkable';
 import styles from './PostEditor.css';
 const FormItem = Form.Item;
+const Option = Select.Option;
 
 const PostEditor = Form.create()((props) => {
 
-  const { form, post, handleSubmit, handleContentChange } = props;
+  const { form, post, tags, handleSubmit, handleContentChange } = props;
 
   const { getFieldDecorator, getFieldsValue, validateFields } = form;
+
+  const optionList = [];
+  for (let index in tags) {
+    optionList.push(<Option key={tags[index].id}>{tags[index].name}</Option>)
+  }
 
   function onSubmit(e) {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
         const data = getFieldsValue();
-        handleSubmit(data);
+        //tags转换
+        const { tags } = data;
+        let selectedTags = [];
+        for (let index in tags) {
+          selectedTags.push({
+            id: tags[index].key,
+            name: tags[index].label
+          });
+        }
+        let result = data;
+        result.tags = selectedTags;
+        handleSubmit(result);
       }
     });
   }
@@ -43,6 +60,13 @@ const PostEditor = Form.create()((props) => {
           })(
             <Input />
             )}
+        </FormItem>
+        <FormItem label="Tags">
+          {getFieldDecorator('tags')(
+            <Select labelInValue mode="multiple">
+              {optionList}
+            </Select>
+          )}
         </FormItem>
         <Row gutter={32}>
           <Col span={12}>
