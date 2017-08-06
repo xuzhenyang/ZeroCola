@@ -216,6 +216,22 @@ public class PostServiceTest {
         Assert.assertEquals(0, postService.getOpenPosts(0, 10).getContent().size());
     }
 
-
+    @Test
+    public void testSavePostWithTagsExist() throws Exception {
+        Tag tag1 = new Tag();
+        tag1.setName("test_tag");
+        Tag savedTag = tagService.saveOrUpdate(tag1);
+        Tag testTag = new Tag();
+        testTag.setId(savedTag.getId());
+        testTag.setName(savedTag.getName());
+        Post post = createPost("test_post", "hello");
+        post.addTag(testTag);
+        Tag tag2 = new Tag();
+        tag2.setName("test_tag_2");
+        post.addTag(tag2);
+        Post savedPost = postService.createPost(post);
+        Assert.assertEquals(2, savedPost.getTags().size());
+        Assert.assertEquals("test_tag", post.getTags().get(0).getName());
+    }
 
 }

@@ -1,6 +1,7 @@
 package co.lilpilot.blog.service;
 
 import co.lilpilot.blog.model.Post;
+import co.lilpilot.blog.model.Tag;
 import co.lilpilot.blog.model.enums.PostState;
 import co.lilpilot.blog.repository.PostRepository;
 import com.google.common.base.Strings;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,6 +25,8 @@ public class PostService {
     private PostRepository postRepository;
     @Autowired
     private MarkdownService markdownService;
+    @Autowired
+    private TagService tagService;
 
     public Page<Post> getPosts(Integer page, Integer pageSize) {
         return postRepository.findAll(new PageRequest(page, pageSize));
@@ -70,6 +75,7 @@ public class PostService {
         if (post.getStatus() == null) {
             post.setStatus(PostState.OPEN.getValue());
         }
+        post.setTags(getSavedTags(post.getTags()));
         //render markdown content
         post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);
@@ -83,6 +89,7 @@ public class PostService {
         if (StringUtils.isEmpty(post.getTitle()) || StringUtils.isEmpty(post.getContent())) {
             throw new IllegalArgumentException("post is empty");
         }
+        post.setTags(getSavedTags(post.getTags()));
         //render markdown content
         post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);
@@ -95,6 +102,27 @@ public class PostService {
         Post target = getById(post.getId());
         target.setStatus(PostState.CLOSED.getValue());
         return postRepository.save(target);
+    }
+
+    /**
+     * 查询并补全已存在的tag属性
+     * @param tags
+     * @return
+     */
+    private List<Tag> getSavedTags(List<Tag> tags) {
+        List<Tag> result = new ArrayList<>();
+        for (Tag tag : tags) {
+            if (tag.getId() != null) {
+                Tag savedTag = tagService.getById(tag.getId());
+                if (savedTag == null) {
+                    throw new IllegalArgumentException("tag不存在");
+                }
+                result.add(savedTag);
+                continue;
+            }
+            result.add(tag);
+        }
+        return result;
     }
 
 }

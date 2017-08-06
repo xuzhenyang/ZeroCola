@@ -17,7 +17,7 @@ public class TagService {
     @Autowired
     private TagRepository tagRepository;
 
-    public List<Tag> getAllTags(Integer page, Integer pageSize) {
+    public List<Tag> getAllTags() {
         return tagRepository.findAll();
     }
 

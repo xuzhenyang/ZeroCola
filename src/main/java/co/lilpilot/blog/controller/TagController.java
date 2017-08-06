@@ -23,16 +23,8 @@ public class TagController {
 
     @GetMapping("/tags")
     @ApiOperation(value = "获取所有标签")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "当前页数", defaultValue = "1", dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页条目数", defaultValue = "10", dataType = "Integer", paramType = "query")
-    })
-    public Result<List<Tag>> getAllTags(
-            @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer pageSize
-    ) {
-        page = page < 1 ? 0 : page - 1;
-        return Result.success(tagService.getAllTags(page, pageSize));
+    public Result<List<Tag>> getAllTags() {
+        return Result.success(tagService.getAllTags());
     }
 
     @GetMapping("/tags/{id}")

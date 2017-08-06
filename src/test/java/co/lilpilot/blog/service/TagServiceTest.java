@@ -50,12 +50,12 @@ public class TagServiceTest {
      */
     @Test
     public void testGetAllTags() throws Exception {
-        Assert.assertEquals(0, tagService.getAllTags(0, 10).getContent().size());
+        Assert.assertEquals(0, tagService.getAllTags().size());
         Tag tag_1 = createTag("test1");
         Tag tag_2 = createTag("test2");
         tagService.saveOrUpdate(tag_1);
         tagService.saveOrUpdate(tag_2);
-        Assert.assertEquals(2, tagService.getAllTags(0, 10).getContent().size());
+        Assert.assertEquals(2, tagService.getAllTags().size());
     }
 
     /**
