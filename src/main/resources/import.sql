@@ -1,3 +1,1 @@
-INSERT INTO tags(name, create_time) VALUES ('tag1', '2017-08-06 17:32:54');
-INSERT INTO tags(name, create_time) VALUES ('tag2', '2017-08-06 17:32:54');
-INSERT INTO tags(name, create_time) VALUES ('tag3', '2017-08-06 17:32:54');
+INSERT INTO user(username, password_hashed, role, create_time) VALUES ('test', '$2a$10$6k/E4l2DstNVpXZ274NFu.suhZU3UYSr0kpV64Huo6YuaZOlJICdO', 'ADMIN', '2017-08-13 17:05:15');

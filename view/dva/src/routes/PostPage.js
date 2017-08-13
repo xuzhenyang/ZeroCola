@@ -9,6 +9,11 @@ const PostPage = (props) => {
   const { dispatch, posts } = props;
   const post = posts.post;
 
+  const tagList = [];
+  for(let i in post.tags) {
+    tagList.push(<span>{post.tags[i].name} </span>);
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.container}>
@@ -16,6 +21,7 @@ const PostPage = (props) => {
           <h1>{post.title}</h1>
         </div>
       </div>
+      <div>{tagList}</div>
       <div className={styles.date}>
         <p>{moment.unix(post.createTime / 1000).format('YYYY-MM-DD')}</p>
       </div>

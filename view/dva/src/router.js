@@ -12,6 +12,7 @@ import AdminPage from "./routes/admin/AdminPage.js";
 import AdminPostsPage from "./routes/admin/Posts.js";
 import PostCreatePage from "./routes/admin/PostCreatePage.js";
 import PostEditPage from "./routes/admin/PostEditPage.js";
+import AdminTagsPage from "./routes/admin/Tags.js";
 
 function RouterConfig({ history, app }) {
   function requireAuth(nextState, replace, callback) {
@@ -33,6 +34,7 @@ function RouterConfig({ history, app }) {
         <Route path="posts" component={AdminPostsPage} />
         <Route path="postCreate" component={PostCreatePage} />
         <Route path="postEdit/:id" component={PostEditPage} />
+        <Route path="tags" component={AdminTagsPage} />
       </Route>
     </Router>
   );

@@ -1,4 +1,5 @@
 import * as tagService from '../services/tags';
+import { routerRedux } from 'dva/router';
 
 export default {
   namespace: 'tags',
@@ -13,6 +14,14 @@ export default {
     }
   },
   effects: {
+    *save({ payload }, { call, put }) {
+      const tag = payload;
+      const response = yield call(tagService.save, tag);
+      if (response.data) {
+        yield put(routerRedux.push('/admin/tags'));
+      }
+
+    },
     *getTags({ payload }, { call, put }) {
       const response = yield call(tagService.getTags);
       const data = response.data.data;
@@ -23,11 +32,14 @@ export default {
         }
       });
     },
+    *deleteTags({ payload }, { call, put }) {
+      console.log(payload);
+    }
   },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
-        if (pathname == '/admin/postCreate') {
+        if (pathname == '/admin/tags') {
           dispatch({ type: 'getTags' });
           return;
         }
