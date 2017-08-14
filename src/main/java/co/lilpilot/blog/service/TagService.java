@@ -50,10 +50,8 @@ public class TagService {
         if (tag == null || tag.getId() == null) {
             throw new IllegalArgumentException("tag is null");
         }
-        Iterator<Post> iterator = tag.getPosts().iterator();
-        while(iterator.hasNext()) {
-            Post post = iterator.next();
-            post.removeTag(tag);
+        for(Post post : tag.getPosts()) {
+            post.getTags().remove(tag);
         }
         tagRepository.delete(tag);
     }
