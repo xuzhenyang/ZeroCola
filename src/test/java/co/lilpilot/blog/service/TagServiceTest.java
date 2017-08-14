@@ -12,6 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TagService Tester.
  *
@@ -103,5 +106,39 @@ public class TagServiceTest {
         Assert.assertNotNull(result);
     }
 
+    /**
+     * Method: delete(Tag tag)
+     */
+    @Test
+    public void testDelete() throws Exception {
+        Tag tag = createTag("tag_test");
+        tag = tagService.saveOrUpdate(tag);
+        Assert.assertNotNull(tag);
+        tagService.delete(tag);
+        Assert.assertNull(tagService.getByName("tag_test_1"));
+    }
+
+    @Test
+    public void testDeleteLink() throws Exception {
+        Tag tag1 = createTag("tag_test_1");
+        Tag tag2 = createTag("tag_test_2");
+        Post post = new Post();
+        post.setTitle("test_post");
+        post.setContent("content");
+        post.addTag(tag1);
+        post = postService.createPost(post);
+        Post result = postService.getByTitle("test_post");
+        Assert.assertNotNull(result);
+        Assert.assertEquals("tag_test_1", result.getTags().get(0).getName());
+        tag1 = tagService.getByName("tag_test_1");
+        result.removeTag(tag1);
+        result.addTag(tag2);
+        post = postService.updatePost(result);
+        tagService.delete(tag1);
+        Assert.assertNull(tagService.getByName("tag_test_1"));
+        result = postService.getByTitle("test_post");
+        Assert.assertEquals(1, result.getTags().size());
+        Assert.assertEquals("tag_test_2", result.getTags().get(0).getName());
+    }
 
 } 

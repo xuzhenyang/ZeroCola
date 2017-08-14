@@ -1,11 +1,13 @@
 package co.lilpilot.blog.service;
 
+import co.lilpilot.blog.model.Post;
 import co.lilpilot.blog.model.Tag;
 import co.lilpilot.blog.repository.TagRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,6 +18,8 @@ public class TagService {
 
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private PostService postService;
 
     public List<Tag> getAllTags() {
         return tagRepository.findAll();
@@ -40,5 +44,17 @@ public class TagService {
             throw new IllegalArgumentException("tag is null");
         }
         return tagRepository.save(tag);
+    }
+
+    public void delete(Tag tag) {
+        if (tag == null || tag.getId() == null) {
+            throw new IllegalArgumentException("tag is null");
+        }
+        Iterator<Post> iterator = tag.getPosts().iterator();
+        while(iterator.hasNext()) {
+            Post post = iterator.next();
+            post.removeTag(tag);
+        }
+        tagRepository.delete(tag);
     }
 }
