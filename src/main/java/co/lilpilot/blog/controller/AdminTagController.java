@@ -43,4 +43,19 @@ public class AdminTagController {
         return Result.success(tagService.saveOrUpdate(tag));
     }
 
+    @DeleteMapping("/tags/{id}")
+    @ApiOperation(value = "删除标签")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Long", paramType = "path")
+    })
+    public Result<Tag> deleteTag(
+            @PathVariable Long id) {
+        Tag tag = tagService.getById(id);
+        if (tag == null) {
+            return Result.fail("500", "标签不存在");
+        }
+        log.info("删除标签 name : {}", tag.getName());
+        return Result.success(tagService.delete(tag));
+    }
+
 }

@@ -32,8 +32,12 @@ export default {
         }
       });
     },
-    *deleteTags({ payload }, { call, put }) {
+    *deleteTag({ payload }, { call, put }) {
       console.log(payload);
+      const response = yield call(tagService.deleteTag, payload);
+      if (response.data) {
+        yield put(routerRedux.push('/admin/tags'));
+      }
     }
   },
   subscriptions: {

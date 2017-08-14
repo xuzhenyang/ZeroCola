@@ -46,7 +46,7 @@ public class TagService {
         return tagRepository.save(tag);
     }
 
-    public void delete(Tag tag) {
+    public Tag delete(Tag tag) {
         if (tag == null || tag.getId() == null) {
             throw new IllegalArgumentException("tag is null");
         }
@@ -54,5 +54,6 @@ public class TagService {
             post.getTags().remove(tag);
         }
         tagRepository.delete(tag);
+        return tag;
     }
 }

@@ -41,7 +41,7 @@ function Tags(props) {
       key: 'operation',
       render: (text, record) => (
         <span>
-          <Button onClick={() => { dispatch({ type: 'tags/deleteTags', payload: record.id }); }}>删除</Button>
+          <Button onClick={() => { dispatch({ type: 'tags/deleteTag', payload: record.id }); }}>删除</Button>
         </span>
       )
     }
