@@ -5,7 +5,7 @@ import PostEditor from '../../components/admin/Posts/PostEditor';
 
 const PostEditPage = (props) => {
 
-  const { dispatch, posts } = props;
+  const { dispatch, posts, tags } = props;
 
   function handleSubmit(data) {
     dispatch({
@@ -34,6 +34,7 @@ const PostEditPage = (props) => {
 
   const editorProps = {
     post: posts.post ? posts.post : null,
+    tags: tags.tags,
     handleSubmit: handleSubmit,
     handleContentChange: handleContentChange,
   }

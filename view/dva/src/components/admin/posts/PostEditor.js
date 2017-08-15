@@ -10,11 +10,21 @@ const PostEditor = Form.create()((props) => {
 
   const { form, post, tags, handleSubmit, handleContentChange } = props;
 
-  const { getFieldDecorator, getFieldsValue, validateFields } = form;
+  const { getFieldDecorator, getFieldsValue, validateFields, resetFields } = form;
 
   const optionList = [];
   for (let index in tags) {
     optionList.push(<Option key={tags[index].id}>{tags[index].name}</Option>)
+  }
+
+  const defaultSelected = [];
+  if (post) {
+    for (let index in post.tags) {
+      defaultSelected.push({
+        key: post.tags[index].id,
+        label: post.tags[index].name
+      });
+    }
   }
 
   function onSubmit(e) {
@@ -36,6 +46,7 @@ const PostEditor = Form.create()((props) => {
         handleSubmit(result);
       }
     });
+    resetFields();
   }
 
   function editContent(e) {
@@ -50,7 +61,7 @@ const PostEditor = Form.create()((props) => {
     <div className={styles.normal}>
       <Form layout="horizontal" onSubmit={onSubmit}>
         <Button type="primary" htmlType="submit">Submit</Button>
-        <FormItem label="Titile">
+        <FormItem label="Titile" style={{ maxWidth: "300" }}>
           {getFieldDecorator('title', {
             initialValue: post ? post.title : '',
             rules: [{
@@ -61,8 +72,10 @@ const PostEditor = Form.create()((props) => {
             <Input />
             )}
         </FormItem>
-        <FormItem label="Tags">
-          {getFieldDecorator('tags')(
+        <FormItem label="Tags" style={{ maxWidth: "300" }}>
+          {getFieldDecorator('tags', {
+            initialValue: defaultSelected,
+          })(
             <Select labelInValue mode="multiple">
               {optionList}
             </Select>

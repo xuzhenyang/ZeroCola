@@ -1,5 +1,6 @@
 import * as tagService from '../services/tags';
 import { routerRedux } from 'dva/router';
+import pathToRegexp from 'path-to-regexp';
 
 export default {
   namespace: 'tags',
@@ -33,7 +34,6 @@ export default {
       });
     },
     *deleteTag({ payload }, { call, put }) {
-      console.log(payload);
       const response = yield call(tagService.deleteTag, payload);
       if (response.data) {
         yield put(routerRedux.push('/admin/tags'));
@@ -44,6 +44,17 @@ export default {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
         if (pathname == '/admin/tags') {
+          dispatch({ type: 'getTags' });
+          return;
+        }
+        //文章新建页
+        if (pathname == '/admin/postCreate') {
+          dispatch({ type: 'getTags' });
+          return;
+        }
+        //文章修改页
+        const editMatch = pathToRegexp('/admin/postEdit/:postId').exec(pathname)
+        if (editMatch) {
           dispatch({ type: 'getTags' });
           return;
         }
