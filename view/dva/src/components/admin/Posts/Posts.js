@@ -42,7 +42,7 @@ function Posts({ dispatch, adminPostPage }) {
       key: 'updateTime',
       render: (text, record) => {
         if (record.updateTime) {
-            return (<p>{moment.unix(record.updateTime / 1000).format('YYYY-MM-D H:mm')}</p>);
+          return (<p>{moment.unix(record.updateTime / 1000).format('YYYY-MM-D H:mm')}</p>);
         }
       }
     },
@@ -52,6 +52,7 @@ function Posts({ dispatch, adminPostPage }) {
       render: (text, record) => (
         <span>
           <Button onClick={() => { dispatch(routerRedux.push('/admin/postEdit/' + record.id)); }}>修改</Button>
+          <Button onClick={() => { dispatch({ type: 'posts/close', payload: record.id }) }}>删除</Button>
         </span>
       )
     }

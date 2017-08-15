@@ -73,6 +73,10 @@ export default {
     *update({ payload: { post } }, { call, put }) {
       const response = yield call(postService.update, { ...post });
       yield put(routerRedux.push('/admin/posts'));
+    },
+    *close({ payload }, { call, put }) {
+      const response = yield call(postService.close, payload);
+      yield put(routerRedux.push('/admin/posts'));
     }
   },
   subscriptions: {

@@ -46,6 +46,17 @@ export function update(post) {
   })
 }
 
+export function close(postId) {
+  const token = window.localStorage.getItem(tokenKey);
+  return request(`/api/v1/admin/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      "Authorization": `${token}`
+    },
+  })
+}
+
 export async function getPosts({ page, pageSize }) {
   return request(`/api/v1/posts?page=${page}&pageSize=${pageSize}`);
 }
