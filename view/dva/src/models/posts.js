@@ -104,6 +104,10 @@ export default {
           dispatch({ type: 'getAdminPosts', payload: { page: 1, pageSize: 10 } });
           return;
         }
+        if (pathname === "/admin/postCreate") {
+          dispatch({ type:"updatePost", payload: {} });
+          return;
+        }
         //文章修改页
         const editMatch = pathToRegexp('/admin/postEdit/:postId').exec(pathname)
         if (editMatch) {
