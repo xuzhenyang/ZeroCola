@@ -14,7 +14,7 @@ function MySider(props) {
     return (
         <Sider {...props} >
             <div className={styles.logo} />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedKeys]} defaultOpenKeys={['sub1']}>
+            <Menu theme="dark" mode="inline" selectedKeys={[selectedKeys]} defaultOpenKeys={['sub1']}>
                 <Menu.Item key="/admin">
                     <Link to="/admin">
                         <Icon type="home" />
