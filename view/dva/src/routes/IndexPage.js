@@ -29,7 +29,7 @@ const IndexPage = (props) => {
       <div className={styles.main}>
         <div className={styles.head}>
           <div><img className={styles.logo} src={logo} /></div>
-          <p>blablabla...</p>
+          <p>Here is my teenyverse !</p>
         </div>
         <hr className={styles.split} />
         <div>
