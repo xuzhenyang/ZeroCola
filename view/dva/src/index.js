@@ -1,9 +1,12 @@
 import dva from 'dva';
 import { message } from 'antd';
 import './index.css';
+import { browserHistory } from 'dva/router';
 
 // 1. Initialize
 const app = dva({
+    // use browser history(remove '#' on url)
+    history: browserHistory,
     onError(e, dispatch) {
         console.log(e);
         if (e.message == "Unauthorized") {
