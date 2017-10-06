@@ -57,11 +57,16 @@ const PostEditor = Form.create()((props) => {
     highlight: function (/*str, lang*/) { return ''; }
   })).render(post ? post.content : '');
 
+  const formItemLayout = {
+    labelCol: { span: 2 },
+    wrapperCol: { span: 8 },
+  };
+
   return (
     <div className={styles.normal}>
       <Form layout="horizontal" onSubmit={onSubmit}>
-        <Button type="primary" htmlType="submit">Submit</Button>
-        <FormItem label="Titile" style={{ maxWidth: "300" }}>
+        <Button type="primary" htmlType="submit" style={{ margin: 10 }}>Submit</Button>
+        <FormItem label="Titile" {...formItemLayout}>
           {getFieldDecorator('title', {
             initialValue: post ? post.title : '',
             rules: [{
@@ -72,14 +77,14 @@ const PostEditor = Form.create()((props) => {
             <Input />
             )}
         </FormItem>
-        <FormItem label="Tags" style={{ maxWidth: "300" }}>
+        <FormItem label="Tags" {...formItemLayout}>
           {getFieldDecorator('tags', {
             initialValue: defaultSelected,
           })(
             <Select labelInValue mode="multiple">
               {optionList}
             </Select>
-          )}
+            )}
         </FormItem>
         <Row gutter={32}>
           <Col span={12}>
@@ -94,7 +99,7 @@ const PostEditor = Form.create()((props) => {
               )}
           </Col>
           <Col span={12}>
-            <div style={{ overflowY: "scroll" }}>
+            <div style={{ overflowY: "scroll", border: "1px solid gray", height: 694 }}>
               <div className={styles.render}>
                 <p style={{ margin: '', maxWidth: 700, maxHeight: 700 }} dangerouslySetInnerHTML={{ __html: renderedContent }}>
                 </p>

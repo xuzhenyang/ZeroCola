@@ -11,7 +11,7 @@ function MyAdminLayout({ children, handleClickLogout }) {
       <MySider />
       <Layout>
         <Header style={{ background: '#fff', padding: 0 }} >
-          <Button onClick={handleClickLogout}>logout</Button>
+          <Button onClick={handleClickLogout} style={{ margin: 20 }}>logout</Button>
         </Header>
         <Content style={{ margin: '0 16px' }}>
           {children}
