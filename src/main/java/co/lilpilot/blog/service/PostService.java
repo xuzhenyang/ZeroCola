@@ -64,6 +64,13 @@ public class PostService {
         return postRepository.findByTitle(title);
     }
 
+    public Post getByPermalink(String permalink) {
+        if (Strings.isNullOrEmpty(permalink)) {
+            throw new IllegalArgumentException("permalink is null or empty");
+        }
+        return postRepository.findByPermalink(permalink);
+    }
+
     public Post createPost(Post post) {
         if (post == null) {
             throw new IllegalArgumentException("post is null");

@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByTitle(String title);
 
+    Post findByPermalink(String permalink);
+
     @Query("from Post post where post.status = '1' and post.id = ?1")
     Post findOpenPostById(Long id);
 

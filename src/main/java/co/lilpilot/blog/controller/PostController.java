@@ -59,6 +59,17 @@ public class PostController {
         return Result.success(post);
     }
 
+    @GetMapping("/fastlane/{permalink}")
+    @ApiOperation(value = "获取指定permalin的文章", notes = "根据文章permalink获取文章")
+    @ApiImplicitParam(name = "permalink", value = "文章permalink", required = true, dataType = "String", paramType = "path")
+    public Result<Post> getPostByPermalink(@PathVariable String permalink) {
+        Post post = postService.getByPermalink(permalink);
+        if (post == null) {
+            return Result.fail("500", "文章不存在");
+        }
+        return Result.success(post);
+    }
+
     @GetMapping("/posts/keyword/{keyword}")
     @ApiOperation(value = "模糊查询文章", notes = "根据关键词keyword获取文章")
     @ApiImplicitParams({

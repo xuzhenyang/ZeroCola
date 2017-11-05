@@ -82,6 +82,17 @@ public class PostServiceTest {
     }
 
     /**
+     * Method: getByPermalink(String permalink)
+     */
+    @Test
+    public void testGetByPermalink() throws Exception {
+        Post post = createPost("test", "test");
+        post.setPermalink("test_permalink");
+        Post result = postService.createPost(post);
+        Assert.assertEquals(result, postService.getByPermalink("test_permalink"));
+    }
+
+    /**
      * Method: getPosts()
      */
     @Test
