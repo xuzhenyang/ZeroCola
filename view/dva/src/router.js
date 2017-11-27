@@ -36,6 +36,7 @@ function RouterConfig({ history, app }) {
         <Route path="postEdit/:id" component={PostEditPage} />
         <Route path="tags" component={AdminTagsPage} />
       </Route>
+      <Route path="*" component={props => <h1>Oops! Not Found</h1>}/>
     </Router>
   );
 }
