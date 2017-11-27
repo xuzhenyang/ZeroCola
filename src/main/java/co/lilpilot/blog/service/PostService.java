@@ -83,7 +83,6 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    //TODO post内容不全会不会导致原有内容被覆盖
     public Post updatePost(Post post) {
         if (post == null) {
             throw new IllegalArgumentException("post is null");
