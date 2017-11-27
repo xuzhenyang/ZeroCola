@@ -23,8 +23,6 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
     @Autowired
-    private MarkdownService markdownService;
-    @Autowired
     private TagService tagService;
 
     public Page<Post> getPosts(Integer page, Integer pageSize) {
@@ -82,8 +80,6 @@ public class PostService {
             post.setStatus(PostStateEnum.OPEN.getValue());
         }
         post.setTags(getSavedTags(post.getTags()));
-        //render markdown content
-        post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);
     }
 
@@ -96,8 +92,6 @@ public class PostService {
             throw new IllegalArgumentException("post is empty");
         }
         post.setTags(getSavedTags(post.getTags()));
-        //render markdown content
-        post.setRenderedContent(markdownService.markdownToHtml(post.getContent()));
         return postRepository.save(post);
     }
 

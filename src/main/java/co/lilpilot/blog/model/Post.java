@@ -26,11 +26,6 @@ public class Post extends BaseModel {
     @Column(length = 16777216)
     private String content;
 
-    @ApiModelProperty(value = "渲染后的文章内容")
-    @Lob
-    @Column(length = 16777216)
-    private String renderedContent;
-
     @ApiModelProperty(value = "永久链接")
     private String permalink;
 
@@ -62,7 +57,6 @@ public class Post extends BaseModel {
         return "Post{" +
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", renderedContent='" + renderedContent + '\'' +
                 ", permalink='" + permalink + '\'' +
                 "}" + super.toString();
     }
