@@ -2,7 +2,6 @@ package co.lilpilot.blog.controller;
 
 import co.lilpilot.blog.model.CustomPage;
 import co.lilpilot.blog.model.Post;
-import co.lilpilot.blog.model.enums.PostState;
 import co.lilpilot.blog.model.vo.PostListVO;
 import co.lilpilot.blog.service.PostService;
 import co.lilpilot.blog.util.Result;

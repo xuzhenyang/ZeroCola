@@ -2,7 +2,7 @@ package co.lilpilot.blog.controller;
 
 import co.lilpilot.blog.model.CustomPage;
 import co.lilpilot.blog.model.Post;
-import co.lilpilot.blog.model.enums.PostState;
+import co.lilpilot.blog.model.enums.PostStateEnum;
 import co.lilpilot.blog.model.vo.PostListVO;
 import co.lilpilot.blog.service.PostService;
 import co.lilpilot.blog.util.Result;
@@ -43,7 +43,7 @@ public class AdminPostController {
         CustomPage<PostListVO> customPage = new CustomPage<>(posts.getNumber() + 1, posts.getSize(), posts.getTotalPages(), (int) posts.getTotalElements(), posts.getContent().stream().map(post -> {
             PostListVO postListVO = new PostListVO();
             BeanUtils.copyProperties(post, postListVO);
-            postListVO.setStatusDesc(PostState.getDescByValue(postListVO.getStatus()));
+            postListVO.setStatusDesc(PostStateEnum.getDescByValue(postListVO.getStatus()));
             return postListVO;
         }).collect(Collectors.toList()));
         return Result.success(customPage);
