@@ -2,7 +2,7 @@ package co.lilpilot.blog.controller;
 
 import co.lilpilot.blog.model.CustomPage;
 import co.lilpilot.blog.model.Post;
-import co.lilpilot.blog.model.enums.PostStateEnum;
+import co.lilpilot.blog.model.enums.PostStatusEnum;
 import co.lilpilot.blog.model.vo.PostListVO;
 import co.lilpilot.blog.service.PostService;
 import co.lilpilot.blog.util.Result;
@@ -43,7 +43,7 @@ public class AdminPostController {
         CustomPage<PostListVO> customPage = new CustomPage<>(posts.getNumber() + 1, posts.getSize(), posts.getTotalPages(), (int) posts.getTotalElements(), posts.getContent().stream().map(post -> {
             PostListVO postListVO = new PostListVO();
             BeanUtils.copyProperties(post, postListVO);
-            postListVO.setStatusDesc(PostStateEnum.getDescByValue(postListVO.getStatus()));
+            postListVO.setStatusDesc(PostStatusEnum.getDescByValue(postListVO.getStatus()));
             return postListVO;
         }).collect(Collectors.toList()));
         return Result.success(customPage);
@@ -81,16 +81,22 @@ public class AdminPostController {
         return Result.success(postService.updatePost(post));
     }
 
-    @DeleteMapping("/posts/{id}")
-    @ApiOperation(value = "删除文章")
-    @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path")
-    public Result<Post> closePost(@PathVariable Long id) {
+    @PutMapping("/posts/{id}/status")
+    @ApiOperation(value = "更新文章状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long", paramType = "path"),
+            @ApiImplicitParam(name = "status", value = "文章状态(-1:关闭 1:开放 2:草稿)", required = true, dataType = "Integer", paramType = "body")
+    })
+    public Result<Post> updatePostStatus(
+            @PathVariable Long id,
+            @RequestBody Integer status) {
+        log.info("更新文章状态 id:[{}] status:[{}]", id, status);
         Post post = postService.getById(id);
         if (post == null) {
             return Result.fail("500", "文章不存在");
         }
-        log.info("删除文章 title : {}", post.getTitle());
-        return Result.success(postService.close(post));
+        post.setStatus(status);
+        return Result.success(postService.updatePost(post));
     }
 
 }

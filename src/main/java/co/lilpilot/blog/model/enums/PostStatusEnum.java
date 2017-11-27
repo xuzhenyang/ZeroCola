@@ -5,9 +5,9 @@ import lombok.Getter;
 /**
  * Created by lilpilot on 2017/7/5.
  */
-public enum PostStateEnum {
+public enum PostStatusEnum {
 
-    CLOSED(0 ,"关闭"),
+    CLOSED(-1 ,"关闭"),
     OPEN(1, "开放"),
     DRAFT(2, "草稿");
 
@@ -16,15 +16,15 @@ public enum PostStateEnum {
     @Getter
     private String desc;
 
-    PostStateEnum(Integer value, String desc) {
+    PostStatusEnum(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
 
     public static String getDescByValue(Integer value) {
-        for (PostStateEnum postStateEnum : PostStateEnum.values()) {
-            if (postStateEnum.getValue().equals(value)) {
-                return postStateEnum.getDesc();
+        for (PostStatusEnum postStatusEnum : PostStatusEnum.values()) {
+            if (postStatusEnum.getValue().equals(value)) {
+                return postStatusEnum.getDesc();
             }
         }
         return "";

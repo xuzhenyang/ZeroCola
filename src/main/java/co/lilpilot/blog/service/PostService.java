@@ -2,7 +2,7 @@ package co.lilpilot.blog.service;
 
 import co.lilpilot.blog.model.Post;
 import co.lilpilot.blog.model.Tag;
-import co.lilpilot.blog.model.enums.PostStateEnum;
+import co.lilpilot.blog.model.enums.PostStatusEnum;
 import co.lilpilot.blog.repository.PostRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +77,7 @@ public class PostService {
         }
         //默认开放状态
         if (post.getStatus() == null) {
-            post.setStatus(PostStateEnum.OPEN.getValue());
+            post.setStatus(PostStatusEnum.OPEN.getValue());
         }
         post.setTags(getSavedTags(post.getTags()));
         return postRepository.save(post);
@@ -99,7 +99,7 @@ public class PostService {
             throw new IllegalArgumentException("post is null");
         }
         Post target = getById(post.getId());
-        target.setStatus(PostStateEnum.CLOSED.getValue());
+        target.setStatus(PostStatusEnum.CLOSED.getValue());
         return postRepository.save(target);
     }
 
