@@ -1,0 +1,16 @@
+.IndexPage {
+    text-align: center;
+}
+
+.IndexPage-logo {
+    height: 80px;
+}
+
+.IndexPage-separator {
+    width: 60%;
+}
+
+.IndexPage-ul {
+    list-style-type: none;
+    padding: 0;
+}
