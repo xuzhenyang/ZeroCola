@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import IndexPage from './pages/IndexPage';
 import PostListPage from './pages/PostListPage';
 import PostDetailPage from './pages/PostDetailPage';
@@ -9,10 +9,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path="/" exact component={IndexPage} />
-        <Route path="/index" component={IndexPage} />
-        <Route path="/posts" component={PostListPage} />
-        <Route path="/posts/:id" component={PostDetailPage} />
+        <Switch>
+          <Route path="/" exact component={IndexPage} />
+          <Route path="/index" component={IndexPage} />
+          <Route path="/posts" exact component={PostListPage} />
+          <Route path="/posts/:id" component={PostDetailPage} />
+        </Switch>
       </div>
     );
   }

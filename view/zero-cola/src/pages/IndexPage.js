@@ -3,29 +3,57 @@ import logo from '../logo.svg';
 import './IndexPage.css';
 import { Link } from 'react-router-dom';
 
+function Post(post) {
+    return (
+        <div>
+            <Link to={"/posts/" + post.id}>
+                <h2>{post.title}</h2>
+            </Link>
+            <p>{post.createTime}</p>
+        </div>
+    );
+}
+
+function PostList(posts) {
+    const postList = [];
+    for (let index in posts) {
+        postList.push(
+            <li key={index}>
+                {Post(posts[index])}
+            </li>
+        );
+    }
+    return (
+        <ul className={"IndexPage-ul"}>
+            {postList}
+        </ul>
+    );
+}
+
 class IndexPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: [],
+        };
+    }
+
+    componentDidMount() {
+        fetch('/api/v1/posts?page=1&pageSize=3')
+            .then(res => res.json())
+            .then(res => this.setState({
+                posts: res.data.data
+            }));
+    }
+
     render() {
         return (
             <div className={"IndexPage"}>
                 <img className={"IndexPage-logo"} src={logo} />
                 <p>blablabla...</p>
                 <hr className={"IndexPage-separator"} />
-                <ul className={"IndexPage-ul"}>
-                    <li>
-                        <Link to="/posts/1">
-                            <h2>This is Title</h2>
-                        </Link>
-                        <p>2017-12-05</p>
-                    </li>
-                    <li>
-                        <h2>This is Title</h2>
-                        <p>2017-12-05</p>
-                    </li>
-                    <li>
-                        <h2>This is Title</h2>
-                        <p>2017-12-05</p>
-                    </li>
-                </ul>
+                {PostList(this.state.posts)}
                 <Link to="/posts">
                     <button>More</button>
                 </Link>

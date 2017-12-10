@@ -1,38 +1,53 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+function Post(post) {
+    return (
+        <div>
+            <Link to={"/posts/" + post.id}>
+                <h2>{post.title}</h2>
+            </Link>
+        </div>
+    );
+}
+
+function PostList(posts) {
+    const postList = [];
+    for (let index in posts) {
+        postList.push(
+            <li key={index}>
+                {Post(posts[index])}
+            </li>
+        );
+    }
+    return (
+        <ul>
+            {postList}
+        </ul>
+    );
+}
+
 class PostListPage extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        this.state = {
+            posts: [],
+        };
     }
 
     componentDidMount() {
         fetch('/api/v1/posts')
-        .then(res => res.json())
-        .then(res => console.log(res))
+            .then(res => res.json())
+            .then(res => this.setState({
+                posts: res.data.data
+            }));
     }
 
     render() {
-        return(
+        return (
             <div>
                 <h1>PostListPage</h1>
-                <ul>
-                    <li>
-                        <Link to="/posts/1">
-                            <h2>This is Title</h2>
-                        </Link>
-                        <p>2017-12-05</p>
-                    </li>
-                    <li>
-                        <h2>This is Title</h2>
-                        <p>2017-12-05</p>
-                    </li>
-                    <li>
-                        <h2>This is Title</h2>
-                        <p>2017-12-05</p>
-                    </li>
-                </ul>
+                {PostList(this.state.posts)}
             </div>
         );
     }
