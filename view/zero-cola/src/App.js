@@ -12,7 +12,7 @@ class App extends Component {
         <Route path="/" exact component={IndexPage} />
         <Route path="/index" component={IndexPage} />
         <Route path="/posts" component={PostListPage} />
-        <Route path="/post/:id" component={PostDetailPage} />
+        <Route path="/posts/:id" component={PostDetailPage} />
       </div>
     );
   }

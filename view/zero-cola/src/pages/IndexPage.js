@@ -12,7 +12,7 @@ class IndexPage extends Component {
                 <hr className={"IndexPage-separator"} />
                 <ul className={"IndexPage-ul"}>
                     <li>
-                        <Link to="/post/1">
+                        <Link to="/posts/1">
                             <h2>This is Title</h2>
                         </Link>
                         <p>2017-12-05</p>
