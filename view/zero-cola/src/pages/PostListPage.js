@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
-import './IndexPage.css';
 import { Link } from 'react-router-dom';
 
-class IndexPage extends Component {
+class PostListPage extends Component {
     render() {
-        return (
-            <div className={"IndexPage"}>
-                <img className={"IndexPage-logo"} src={logo} />
-                <p>blablabla...</p>
-                <hr className={"IndexPage-separator"} />
-                <ul className={"IndexPage-ul"}>
+        return(
+            <div>
+                <h1>PostListPage</h1>
+                <ul>
                     <li>
                         <Link to="/post/1">
                             <h2>This is Title</h2>
@@ -26,12 +22,9 @@ class IndexPage extends Component {
                         <p>2017-12-05</p>
                     </li>
                 </ul>
-                <Link to="/posts">
-                    <button>More</button>
-                </Link>
             </div>
         );
     }
 }
 
-export default IndexPage;
+export default PostListPage;
