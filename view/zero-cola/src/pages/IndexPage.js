@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import './IndexPage.css';
 import { Link } from 'react-router-dom';
+import { requestGet } from '../common';
 
 function Post(post) {
     return (
@@ -40,11 +41,9 @@ class IndexPage extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/v1/posts?page=1&pageSize=3')
-            .then(res => res.json())
-            .then(res => this.setState({
-                posts: res.data.data
-            }));
+        requestGet('/api/v1/postsss?page=1&pageSize=3', response => this.setState({
+            posts: response.data.data
+        }));
     }
 
     render() {
