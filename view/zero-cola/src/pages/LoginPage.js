@@ -28,7 +28,6 @@ class LoginPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log('submit');
         let request = {
             method: 'POST',
             headers: {
@@ -39,14 +38,12 @@ class LoginPage extends Component {
         fetch('/api/v1/login', request)
             .then(response => response.json())
             .then(response => {
-                console.log(response)
                 const token = response.token;
                 window.localStorage.setItem(tokenKey, token);
             })
     }
 
     render() {
-        console.log(window.localStorage.getItem(tokenKey));
         return (
             <div>
                 LoginPage

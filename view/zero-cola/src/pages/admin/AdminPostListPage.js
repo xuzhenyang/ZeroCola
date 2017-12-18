@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { request } from '../common';
+import { request } from '../../common';
+import { tokenKey } from '../../config';
 
 function Post(post) {
     return (
@@ -28,7 +29,7 @@ function PostList(posts) {
     );
 }
 
-class PostListPage extends Component {
+class AdminPostListPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +38,13 @@ class PostListPage extends Component {
     }
 
     componentDidMount() {
-        request('/api/v1/posts')
+        const token = window.localStorage.getItem(tokenKey);
+        request('/api/v1/admin/posts', {
+            method: 'GET',
+            headers: new Headers({
+                "Authorization": `${token}`
+            })
+        })
             .then(data => this.setState({
                 posts: data.data.data
             }));
@@ -46,11 +53,11 @@ class PostListPage extends Component {
     render() {
         return (
             <div>
-                <h1>PostListPage</h1>
+                <h1>AdminPostListPage</h1>
                 {PostList(this.state.posts)}
             </div>
         );
     }
 }
 
-export default PostListPage;
+export default AdminPostListPage;

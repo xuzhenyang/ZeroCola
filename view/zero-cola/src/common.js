@@ -1,7 +1,7 @@
 import { tokenKey } from './config';
 
 export function request(url, options) {
-    return fetch(url)
+    return fetch(url, options)
         .then(function (response) {
             if (response.ok) {
                 return response.json();
