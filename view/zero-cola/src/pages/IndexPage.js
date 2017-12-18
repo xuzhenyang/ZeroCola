@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import './IndexPage.css';
 import { Link } from 'react-router-dom';
-import { requestGet } from '../common';
+import { request } from '../common';
 
 function Post(post) {
     return (
@@ -41,7 +41,7 @@ class IndexPage extends Component {
     }
 
     componentDidMount() {
-        requestGet('/api/v1/postsss?page=1&pageSize=3', response => this.setState({
+        request('/api/v1/posts?page=1&pageSize=3').then(response => this.setState({
             posts: response.data.data
         }));
     }
