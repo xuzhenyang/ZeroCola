@@ -6,6 +6,7 @@ import IndexPage from './pages/IndexPage';
 import PostListPage from './pages/PostListPage';
 import PostDetailPage from './pages/PostDetailPage';
 import AdminPostListPage from './pages/admin/AdminPostListPage';
+import AdminIndexPage from './pages/admin/AdminIndexPage';
 import './App.css';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path="/index" component={IndexPage} />
           <Route path="/posts" exact component={PostListPage} />
           <Route path="/posts/:id" component={PostDetailPage} />
+          <Route path="/admin" exact component={AdminIndexPage}/>
           <Route path="/admin/posts" exact component={AdminPostListPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
