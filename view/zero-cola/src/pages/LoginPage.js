@@ -40,6 +40,7 @@ class LoginPage extends Component {
             .then(response => {
                 const token = response.token;
                 window.localStorage.setItem(tokenKey, token);
+                window.location.href = "/admin";
             })
     }
 

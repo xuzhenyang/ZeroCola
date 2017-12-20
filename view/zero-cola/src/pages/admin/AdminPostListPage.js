@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { request } from '../../common';
 import { tokenKey } from '../../config';
+import AdminLayout from '../../components/AdminLayout';
 
 function Post(post) {
     return (
@@ -53,8 +54,13 @@ class AdminPostListPage extends Component {
     render() {
         return (
             <div>
-                <h1>AdminPostListPage</h1>
-                {PostList(this.state.posts)}
+                <AdminLayout>
+                    <h1>AdminPostListPage</h1>
+                    <Link to="/admin/posts/new">
+                        <button>new</button>
+                    </Link>
+                    {PostList(this.state.posts)}
+                </AdminLayout>
             </div>
         );
     }

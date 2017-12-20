@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './AdminLayout.css';
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -29,12 +30,20 @@ class AdminLayout extends Component {
                     <div className="logo" />
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1">
-                            <Icon type="pie-chart" />
-                            <span>Option 1</span>
+                            <Link to="/admin">
+                                <Icon type="pie-chart" />
+                                <span>首页</span>
+                            </Link>
                         </Menu.Item>
                         <Menu.Item key="2">
+                            <Link to="/admin/posts">
+                                <Icon type="desktop" />
+                                <span>文章管理</span>
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="3">
                             <Icon type="desktop" />
-                            <span>Option 2</span>
+                            <span>标签管理</span>
                         </Menu.Item>
                         <SubMenu
                             key="sub1"
@@ -51,19 +60,15 @@ class AdminLayout extends Component {
                             <Menu.Item key="6">Team 1</Menu.Item>
                             <Menu.Item key="8">Team 2</Menu.Item>
                         </SubMenu>
-                        <Menu.Item key="9">
-                            <Icon type="file" />
-                            <span>File</span>
-                        </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0 }} />
-                    <Content style={{ margin: '0 16px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
+                    <Content style={{ margin: '16px 16px' }}>
+                        {/* <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>User</Breadcrumb.Item>
                             <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                        </Breadcrumb>
+                        </Breadcrumb> */}
                         <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                             {this.props.children}
                         </div>
