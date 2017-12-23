@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import IndexPage from './pages/IndexPage';
@@ -9,8 +9,23 @@ import AdminPostListPage from './pages/admin/AdminPostListPage';
 import AdminIndexPage from './pages/admin/AdminIndexPage';
 import AdminPostCreatePage from './pages/admin/AdminPostCreatePage';
 import './App.css';
+import { auth } from './common';
+
+const AdminRoute = ({ component: Component, ...rest }) => {
+  return (<Route {...rest} render={renderProps => {
+    return auth.isAdmin() ?
+      <Component {...renderProps} />
+      :
+      <Redirect to={{
+        pathname: "/login",
+        state: { from: renderProps.location }
+      }} />
+  }} />
+  )
+}
 
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -20,9 +35,9 @@ class App extends Component {
           <Route path="/index" component={IndexPage} />
           <Route path="/posts" exact component={PostListPage} />
           <Route path="/posts/:id" component={PostDetailPage} />
-          <Route path="/admin" exact component={AdminIndexPage}/>
-          <Route path="/admin/posts" exact component={AdminPostListPage} />
-          <Route path="/admin/posts/new" exact component={AdminPostCreatePage} />
+          <AdminRoute path="/admin" exact component={AdminIndexPage} />
+          <AdminRoute path="/admin/posts" exact component={AdminPostListPage} />
+          <AdminRoute path="/admin/posts/new" exact component={AdminPostCreatePage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>

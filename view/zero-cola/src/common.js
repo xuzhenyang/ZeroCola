@@ -1,5 +1,20 @@
 import { tokenKey } from './config';
 
+export const auth = {
+    isAdmin() {
+        const token = window.localStorage.getItem(tokenKey);
+        if (token) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    getToken() {
+        return window.localStorage.getItem(tokenKey);
+    }
+}
+
 export function request(url, options) {
     return fetch(url, options)
         .then(function (response) {
