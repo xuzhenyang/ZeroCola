@@ -1,57 +1,65 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Table, Divider } from 'antd';
 import { request } from '../../common';
 import { tokenKey } from '../../config';
 import AdminLayout from '../../components/AdminLayout';
-
-function Post(post) {
-    return (
-        <div>
-            <Link to={"/posts/" + post.id}>
-                <h2>{post.title}</h2>
-            </Link>
-        </div>
-    );
-}
-
-function PostList(posts) {
-    const postList = [];
-    for (let index in posts) {
-        postList.push(
-            <li key={index}>
-                {Post(posts[index])}
-            </li>
-        );
-    }
-    return (
-        <ul>
-            {postList}
-        </ul>
-    );
-}
 
 class AdminPostListPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             posts: [],
+            pagination: {},
         };
+        this.fetchPosts = this.fetchPosts.bind(this);
+        this.handleTableChange = this.handleTableChange.bind(this);
     }
 
-    componentDidMount() {
+    fetchPosts(page, pageSize) {
+        page = page ? page : 1;
+        pageSize = pageSize ? pageSize : 10;
         const token = window.localStorage.getItem(tokenKey);
-        request('/api/v1/admin/posts', {
+        request(`/api/v1/admin/posts?page=${page}&pageSize=${pageSize}`, {
             method: 'GET',
             headers: new Headers({
                 "Authorization": `${token}`
             })
         })
             .then(data => this.setState({
-                posts: data.data.data
+                posts: data.data.data,
+                pagination: {
+                    current: data.data.pageIndex,
+                    total: data.data.totalNumber,
+                }
             }));
     }
 
+    componentDidMount() {
+        this.fetchPosts(1, 10);
+    }
+
+    handleTableChange(pagination, filters, sorter) {
+        this.fetchPosts(pagination.current, pagination.pageSize);
+    }
+
     render() {
+        const columns = [{
+            title: 'Title',
+            dataIndex: 'title',
+            key: 'title',
+        }, {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+                <span>
+                    <a href="#">Edit</a>
+                    <Divider type="vertical" />
+                    <a href="#">Close</a>
+                </span>
+            )
+        }]
+
         return (
             <div>
                 <AdminLayout>
@@ -59,7 +67,7 @@ class AdminPostListPage extends Component {
                     <Link to="/admin/posts/new">
                         <button>new</button>
                     </Link>
-                    {PostList(this.state.posts)}
+                    <Table columns={columns} dataSource={this.state.posts} pagination={this.state.pagination} onChange={this.handleTableChange} />
                 </AdminLayout>
             </div>
         );
