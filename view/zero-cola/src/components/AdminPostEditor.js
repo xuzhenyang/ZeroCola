@@ -32,6 +32,7 @@ class AdminPostEditor extends Component {
                 return;
             }
             const data = {
+                id: this.props.post.id,
                 title: values.title,
                 tags: values.tags,
                 content: values.content,

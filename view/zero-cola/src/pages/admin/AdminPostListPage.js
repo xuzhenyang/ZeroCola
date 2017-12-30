@@ -53,7 +53,7 @@ class AdminPostListPage extends Component {
             key: 'action',
             render: (text, record) => (
                 <span>
-                    <a href="#">Edit</a>
+                    <a href={`/admin/posts/edit/${record.id}`}>Edit</a>
                     <Divider type="vertical" />
                     <a href="#">Close</a>
                 </span>

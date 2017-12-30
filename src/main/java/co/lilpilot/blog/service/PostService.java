@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -87,7 +88,7 @@ public class PostService {
         if (post == null) {
             throw new IllegalArgumentException("post is null");
         }
-        if (StringUtils.isEmpty(post.getTitle()) || StringUtils.isEmpty(post.getContent())) {
+        if (post.getId() == null || StringUtils.isEmpty(post.getTitle()) || StringUtils.isEmpty(post.getContent())) {
             throw new IllegalArgumentException("post is empty");
         }
         post.setTags(getSavedTags(post.getTags()));
