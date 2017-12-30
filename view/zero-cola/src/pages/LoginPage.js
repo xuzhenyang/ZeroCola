@@ -38,9 +38,14 @@ class LoginPage extends Component {
         fetch('/api/v1/login', request)
             .then(response => response.json())
             .then(response => {
-                const token = response.token;
-                window.localStorage.setItem(tokenKey, token);
-                this.props.history.push('/admin');
+                if (response.token) {
+                    const token = response.token;
+                    window.localStorage.setItem(tokenKey, token);
+                    this.props.history.push('/admin');
+                }
+                else {
+                    alert('wrong username or password')
+                }
             })
     }
 
