@@ -42,8 +42,10 @@ class AdminLayout extends Component {
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Icon type="desktop" />
-                            <span>标签管理</span>
+                            <Link to="/admin/tags">
+                                <Icon type="desktop" />
+                                <span>标签管理</span>
+                            </Link>
                         </Menu.Item>
                         <SubMenu
                             key="sub1"

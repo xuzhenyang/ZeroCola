@@ -9,6 +9,7 @@ import AdminPostListPage from './pages/admin/AdminPostListPage';
 import AdminIndexPage from './pages/admin/AdminIndexPage';
 import AdminPostCreatePage from './pages/admin/AdminPostCreatePage';
 import AdminPostUpdatePage from './pages/admin/AdminPostUpdatePage';
+import AdminTagListPage from './pages/admin/AdminTagListPage';
 import './App.css';
 import { auth } from './common';
 
@@ -40,6 +41,7 @@ class App extends Component {
           <AdminRoute path="/admin/posts" exact component={AdminPostListPage} />
           <AdminRoute path="/admin/posts/new" exact component={AdminPostCreatePage} />
           <AdminRoute path="/admin/posts/edit/:id" exact component={AdminPostUpdatePage} />
+          <AdminRoute path="/admin/tags" exact component={AdminTagListPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
