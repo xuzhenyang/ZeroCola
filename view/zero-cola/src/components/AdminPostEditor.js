@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Button, Select, Tabs } from 'antd';
+import { request } from '../common';
 import marked3 from 'marked3';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
+const Option = Select.Option;
 
 class AdminPostEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            post: props.post
+            post: props.post,
+            tags: [],
         };
         this.onContentChange = this.onContentChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    fetchTags() {
+        request(`/api/v1/tags`, {
+            method: 'GET',
+        })
+            .then(data => this.setState({
+                tags: data.data,
+            }));
     }
 
     onContentChange(e) {
@@ -37,9 +49,24 @@ class AdminPostEditor extends Component {
                 tags: values.tags,
                 content: values.content,
             };
-            this.props.handleSubmit(data);
+            //tags转换
+            const { tags } = data;
+            let selectedTags = [];
+            for (let index in tags) {
+                selectedTags.push({
+                    id: tags[index].key,
+                    name: tags[index].label
+                });
+            }
+            let result = data;
+            result.tags = selectedTags;
+            this.props.handleSubmit(result);
         });
         resetFields();
+    }
+
+    componentDidMount() {
+        this.fetchTags();
     }
 
     render() {
@@ -55,6 +82,22 @@ class AdminPostEditor extends Component {
             wrapperCol: { span: 8 }
         }
 
+        const options = [];
+        const tags = this.state.tags;
+        for (let index in tags) {
+            options.push(<Option key={tags[index].id}>{tags[index].name}</Option>);
+        }
+
+        const defaultSelected = [];
+        if (post) {
+            for (let index in post.tags) {
+                defaultSelected.push({
+                    key: post.tags[index].id,
+                    label: post.tags[index].name
+                });
+            }
+        }
+
         return (
             <div>
                 <Form>
@@ -67,9 +110,16 @@ class AdminPostEditor extends Component {
                             )}
                     </FormItem>
                     <FormItem label="Tags" {...formItemLayout}>
-                        {getFieldDecorator('tags')(
-                            <Select />
-                        )}
+                        {getFieldDecorator('tags', {
+                            initialValue: defaultSelected,
+                        })(
+                            <Select
+                                mode="multiple"
+                                labelInValue
+                            >
+                                {options}
+                            </Select>
+                            )}
                     </FormItem>
                     <Tabs defaultActiveKey="1">
                         <TabPane tab="edit" key="1">

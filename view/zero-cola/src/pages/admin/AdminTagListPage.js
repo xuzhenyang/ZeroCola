@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Form, Input, Button, message, Modal } from 'antd';
+import { Table, Divider, Form, Input, Button, message, Modal, Popconfirm } from 'antd';
 import { request } from '../../common';
 import { tokenKey } from '../../config';
 import AdminLayout from '../../components/AdminLayout';
@@ -146,6 +146,7 @@ class AdminTagListPage extends Component {
     }
 
     render() {
+
         const columns = [{
             title: 'Name',
             dataIndex: 'name',
@@ -157,7 +158,9 @@ class AdminTagListPage extends Component {
                 <span>
                     <a onClick={() => this.setState({ updateModalOpts: { visible: true, tag: record } })}>Rename</a>
                     <Divider type="vertical" />
-                    <a onClick={() => this.handleDeleteTag(record.id)}>Delete</a>
+                    <Popconfirm title={`delete tag : ${record.name} ?`} onConfirm={() => this.handleDeleteTag(record.id)} okText="Yes" cancelText="No">
+                        <a>Delete</a>
+                    </Popconfirm>
                 </span>
             )
         }];
