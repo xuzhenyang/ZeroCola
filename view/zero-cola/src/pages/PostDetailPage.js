@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import marked3 from 'marked3';
 import hljs from 'highlight.js';
 import '../rainbow.css';
+import './PostDetailPage.css';
 
 function Post(post) {
     if (post && post.id) {
         return (
-            <div>
+            <div className="main">
                 <h1>{post.title}</h1>
                 <p>{post.createTime}</p>
-                <div dangerouslySetInnerHTML={{
-                    __html: marked3(post.content, {
-                        highlight: (code => hljs.highlightAuto(code).value)
-                    })
-                }} />
+                <div className="container">
+                    <div dangerouslySetInnerHTML={{
+                        __html: marked3(post.content, {
+                            highlight: (code => hljs.highlightAuto(code).value)
+                        })
+                    }} />
+                </div>
             </div>
         );
     }
