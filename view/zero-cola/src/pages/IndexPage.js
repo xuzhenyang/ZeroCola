@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import './IndexPage.css';
 import { Link } from 'react-router-dom';
-import { request } from '../common';
+import { request, time2DateStr } from '../common';
 
 function Post(post) {
     return (
-        <div>
+        <div style={{"margin": 20}}>
             <Link to={"/posts/" + post.id}>
-                <h2>{post.title}</h2>
+                <h2 style={{"margin": 10}}>{post.title}</h2>
             </Link>
-            <p>{post.createTime}</p>
+            <p>{time2DateStr(post.createTime)}</p>
         </div>
     );
 }
@@ -54,7 +54,7 @@ class IndexPage extends Component {
                 <hr className={"IndexPage-separator"} />
                 {PostList(this.state.posts)}
                 <Link to="/posts">
-                    <button>More</button>
+                    <a>More</a>
                 </Link>
             </div>
         );

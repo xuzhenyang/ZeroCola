@@ -7,6 +7,7 @@
     "babel-plugin-import": "^1.6.3",
     "highlight.js": "^9.12.0",
     "marked3": "^0.5.1",
+    "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-app-rewired": "^1.4.0",
     "react-dom": "^16.2.0",

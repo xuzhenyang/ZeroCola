@@ -3,13 +3,19 @@ import marked3 from 'marked3';
 import hljs from 'highlight.js';
 import '../rainbow.css';
 import './PostDetailPage.css';
+import { time2DateStr } from '../common';
 
 function Post(post) {
     if (post && post.id) {
+        const tagList = [];
+        post.tags.forEach(tag => {
+            tagList.push(<span style={{"margin": 5}}>{tag.name}</span>);
+        });
         return (
             <div className="main">
                 <h1>{post.title}</h1>
-                <p>{post.createTime}</p>
+                <p>{tagList}</p>
+                <p>{time2DateStr(post.createTime)}</p>
                 <div className="container">
                     <div dangerouslySetInnerHTML={{
                         __html: marked3(post.content, {

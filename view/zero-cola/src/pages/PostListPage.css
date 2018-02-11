@@ -1,0 +1,43 @@
+
+.list-main {
+  text-align: center;
+  padding: 40px 0px;
+}
+
+.list-container {
+  text-align: left;
+  margin: 0 auto;
+  padding-top: 20px;
+  max-width: 40%;
+}
+
+.list-container p {
+  margin: 25px 0;
+  line-height: 1.6;
+}
+.list-container li strong,
+.list-container li a {
+  color: var(--fg-dark);
+  font-weight: 400;
+  padding-bottom: 3px;
+  border-bottom: 1px dotted #ddd;
+}
+.list-container li a:hover,
+.list-container p a:hover {
+  color: var(--blue);
+  border-bottom: none;
+}
+.list-container ul {
+  margin: 30px 0 30px 30px;
+  padding: 0;
+}
+.list-container ul ul {
+  margin: 10px 0 10px 30px;
+}
+.list-container ul li {
+  margin: 20px 0;
+  line-height: 1.5em;
+}
+.list-container ul li strong {
+  font-weight: 500;
+}

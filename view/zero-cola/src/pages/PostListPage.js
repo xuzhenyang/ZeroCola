@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { request } from '../common';
+import { request, time2DateStr } from '../common';
+import './PostListPage.css';
 
 function Post(post) {
     return (
         <div>
-            <Link to={"/posts/" + post.id}>
-                <h2>{post.title}</h2>
-            </Link>
+            <div style={{ "display": "inline-block", width: "100%" }}>
+                <span style={{ "float": "left", width: "30%" }}>
+                    <span>{time2DateStr(post.createTime)}</span>
+                </span>
+                <span style={{ "float": "left", width: "70%" }}>
+                    <Link to={"/posts/" + post.id}>
+                        <h2>{post.title}</h2>
+                    </Link>
+                </span>
+            </div>
+
         </div>
     );
 }
@@ -45,9 +54,11 @@ class PostListPage extends Component {
 
     render() {
         return (
-            <div>
-                <h1>PostListPage</h1>
-                {PostList(this.state.posts)}
+            <div className="list-main">
+                <h1>Archive</h1>
+                <div className="list-container">
+                    {PostList(this.state.posts)}
+                </div>
             </div>
         );
     }

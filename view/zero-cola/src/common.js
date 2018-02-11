@@ -1,4 +1,5 @@
 import { tokenKey } from './config';
+import moment from 'moment';
 
 export const auth = {
     isAdmin() {
@@ -35,4 +36,8 @@ export function request(url, options) {
         .catch(function (error) {
             console.log('get a problem: ' + error.message);
         });
+}
+
+export function time2DateStr(time) {
+    return moment.unix(time / 1000).format('YYYY-MM-DD');
 }
