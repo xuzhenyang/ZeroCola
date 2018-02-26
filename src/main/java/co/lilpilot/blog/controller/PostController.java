@@ -35,7 +35,7 @@ public class PostController {
     })
     public Result<CustomPage<PostListVO>> getOpenPosts(
             @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
+            @RequestParam(defaultValue = "100") Integer pageSize) {
         page = page < 1 ? 0 : page - 1;
         Page<Post> posts = postService.getOpenPosts(page, pageSize);
         //convert PostPage -> PostListVOPage
