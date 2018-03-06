@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import logo from '../logo.png';
 import './IndexPage.css';
 import { Link } from 'react-router-dom';
 import { request, time2DateStr } from '../common';
