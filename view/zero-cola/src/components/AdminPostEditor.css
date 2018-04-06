@@ -1,0 +1,6 @@
+.preview img {
+  max-width: 61.8%;
+  margin-right : auto;
+  margin-left: auto;
+  display: table-cell;
+}

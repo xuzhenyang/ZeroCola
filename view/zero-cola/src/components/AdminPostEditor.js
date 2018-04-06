@@ -5,6 +5,7 @@ import { request } from '../common';
 import marked3 from 'marked3';
 import hljs from 'highlight.js';
 import '../rainbow.css';
+import './AdminPostEditor.css';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
@@ -135,7 +136,7 @@ class AdminPostEditor extends Component {
                             </FormItem>
                         </TabPane>
                         <TabPane tab="preview" key="2">
-                            <div style={{ height: 420, overflowY: "scroll", marginBottom: 24, border: "1px solid #d9d9d9", borderRadius: 4, padding: 10 }} dangerouslySetInnerHTML={{
+                            <div className="preview" style={{ height: 420, overflowY: "scroll", marginBottom: 24, border: "1px solid #d9d9d9", borderRadius: 4, padding: 10 }} dangerouslySetInnerHTML={{
                                 __html: marked3(this.state.post.title === "" ? post.content : this.state.post.content, {
                                     highlight: (code => hljs.highlightAuto(code).value)
                                 })
