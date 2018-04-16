@@ -6,6 +6,8 @@
 
 2.0将尝试前后端分离，部分实现将沿用1.0
 
+传送门: [blog.lilpilot.co](http://blog.lilpilot.co/)
+
 ---
 
 ## 技术栈
